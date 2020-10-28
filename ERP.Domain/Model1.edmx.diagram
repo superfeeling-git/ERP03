@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8d4b87b28ad44c129c48fbe051ecefda" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="erp__Model.Dict" Width="1.5" PointX="10" PointY="0.875" />
+        <EntityTypeShape EntityType="erp__Model.DictType" Width="1.5" PointX="7.75" PointY="1.25" />
+        <EntityTypeShape EntityType="erp__Model.Order_Product" Width="1.5" PointX="8.25" PointY="8" />
+        <EntityTypeShape EntityType="erp__Model.PresencenOrder_Product" Width="1.5" PointX="8.875" PointY="12.625" />
+        <EntityTypeShape EntityType="erp__Model.Product" Width="1.5" PointX="15" PointY="10.75" />
+        <EntityTypeShape EntityType="erp__Model.Product_ProductProperty" Width="1.5" PointX="11.25" PointY="14.125" />
+        <EntityTypeShape EntityType="erp__Model.ProductClass" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="erp__Model.ProductClass_Supplier" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="erp__Model.ProductOrder" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="erp__Model.ProductPresencenOrder" Width="1.5" PointX="6.375" PointY="12.875" />
+        <EntityTypeShape EntityType="erp__Model.ProductProperty" Width="1.5" PointX="9" PointY="21.125" />
+        <EntityTypeShape EntityType="erp__Model.Storage" Width="1.5" PointX="4" PointY="13.75" />
+        <EntityTypeShape EntityType="erp__Model.StorageLocation" Width="1.5" PointX="8.25" PointY="16.75" />
+        <EntityTypeShape EntityType="erp__Model.StorageRegion" Width="1.5" PointX="6" PointY="16.75" />
+        <EntityTypeShape EntityType="erp__Model.StorageType" Width="1.5" PointX="1.375" PointY="14" />
+        <EntityTypeShape EntityType="erp__Model.Supplier" Width="1.5" PointX="0.75" PointY="7" />
+        <AssociationConnector Association="erp__Model.FK_Dict_REFERENCE_DictType" />
+        <AssociationConnector Association="erp__Model.FK_Order_Product_REFERENCE_Product" />
+        <AssociationConnector Association="erp__Model.FK_Order_Product_REFERENCE_ProductOrder" />
+        <AssociationConnector Association="erp__Model.FK_PresencenOrder_Product_REFERENCE_Product" />
+        <AssociationConnector Association="erp__Model.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" />
+        <AssociationConnector Association="erp__Model.FK_Product_ProductProperty_REFERENCE_Product" />
+        <AssociationConnector Association="erp__Model.FK_Product_ProductProperty_REFERENCE_ProductProperty" />
+        <AssociationConnector Association="erp__Model.FK_ProductClass_Supplier_REFERENCE_ProductClass" />
+        <AssociationConnector Association="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier" />
+        <AssociationConnector Association="erp__Model.FK_ProductOrder_REFERENCE_Storage" />
+        <AssociationConnector Association="erp__Model.FK_ProductOrder_REFERENCE_Supplier" />
+        <AssociationConnector Association="erp__Model.FK_ProductPresencenOrder_REFERENCE_ProductOrder" />
+        <AssociationConnector Association="erp__Model.FK_Storage_REFERENCE_StorageType" />
+        <AssociationConnector Association="erp__Model.FK_StorageRegion_REFERENCE_Storage" />
+        <AssociationConnector Association="erp__Model.FK_StorageLocation_REFERENCE_StorageRegion" />
+        <EntityTypeShape EntityType="erp__Model.Admin" Width="1.5" PointX="8.5" PointY="3.5" />
+        <EntityTypeShape EntityType="erp__Model.Role" Width="1.5" PointX="3.125" PointY="3.625" />
+        <EntityTypeShape EntityType="erp__Model.Role_User" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="erp__Model.SysMenu" Width="1.5" PointX="0.5" PointY="3.5" />
+        <AssociationConnector Association="erp__Model.FK_Role_User_REFERENCE_Admin" />
+        <AssociationConnector Association="erp__Model.FK_Role_User_REFERENCE_Role" />
+        <AssociationConnector Association="erp__Model.SysMenu_Role" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
