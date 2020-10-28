@@ -7,7 +7,7 @@ using ERP.ViewModel;
 
 namespace ERP.IDAL
 {
-    public interface IProductClassDAL : IBaseAction
+    public interface IProductClassDAL<T> : IBaseAction<T>
     {
     }
 }

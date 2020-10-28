@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERP.IDAL
 {
-    public interface IBaseAction
+    public interface IBaseAction<T>
     {
         /// <summary>
         /// 添加
@@ -14,33 +14,33 @@ namespace ERP.IDAL
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        int Add<T>(T t);
+        int Add(T t);
         /// <summary>
         /// 删除
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        int Delete<T>(int id);
+        int Delete(int id);
         /// <summary>
         /// 获取单条实体
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        T GetModel<T>(int id);
+        T GetModel(int id);
         /// <summary>
         /// 更新
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        int Update<T>(T t);
+        int Update(T t);
         /// <summary>
         /// 获取所有数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        List<T> GetAll<T>();
+        List<T> GetAll();
     }
 }

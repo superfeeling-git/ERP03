@@ -11,7 +11,7 @@ namespace ERP.BLL
 {
     public class ProductClassBLL : IProductClassBLL<ProductClassModel>
     {
-        private IProductClassDAL productClassDAL;
+        private IProductClassDAL<ProductClassModel> productClassDAL;
 
         /// <summary>
         /// 存储递归之后的分类
@@ -20,10 +20,10 @@ namespace ERP.BLL
 
         List<ProductClassModel> ProductClassList = new List<ProductClassModel>();
 
-        public ProductClassBLL(IProductClassDAL _productClassDAL)
+        public ProductClassBLL(IProductClassDAL<ProductClassModel> _productClassDAL)
         {
             this.productClassDAL = _productClassDAL;
-            ProductClassList = productClassDAL.GetAll<ProductClassModel>();
+            ProductClassList = productClassDAL.GetAll();
         }
 
         public int Add(ProductClassModel Model)
@@ -43,7 +43,7 @@ namespace ERP.BLL
                 Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
             }
 
-            return productClassDAL.Add<ProductClassModel>(Model);
+            return productClassDAL.Add(Model);
         }
 
         public int Delete(int id)
@@ -79,7 +79,7 @@ namespace ERP.BLL
 
         public ProductClassModel GetModel(int id)
         {
-            return productClassDAL.GetModel<ProductClassModel>(id);
+            return productClassDAL.GetModel(id);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace ERP.BLL
                 Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
             }
 
-            return productClassDAL.Update<ProductClassModel>(Model);
+            return productClassDAL.Update(Model);
         }
     }
 }
