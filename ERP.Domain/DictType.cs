@@ -20,7 +20,7 @@ namespace ERP.Domain
             this.Dict = new HashSet<Dict>();
         }
     
-        public int TypeID { get; set; }
+        public string TypeCode { get; set; }
         public string TypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

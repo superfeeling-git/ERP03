@@ -5,31 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="erp__Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="AdminID" />
-          </Key>
-          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastLoginIP" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastLoginTime" Type="datetime" />
-        </EntityType>
         <EntityType Name="Dict">
           <Key>
-            <PropertyRef Name="DictID" />
+            <PropertyRef Name="DictCode" />
           </Key>
-          <Property Name="DictID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeID" Type="int" />
-          <Property Name="DictCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DictCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" />
           <Property Name="DictName" Type="nvarchar" MaxLength="50" />
           <Property Name="DictOrder" Type="int" />
         </EntityType>
         <EntityType Name="DictType">
           <Key>
-            <PropertyRef Name="TypeID" />
+            <PropertyRef Name="TypeCode" />
           </Key>
-          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order_Product">
@@ -130,23 +119,6 @@
           <Property Name="ProductPropertyIntro" Type="nvarchar" MaxLength="50" />
           <Property Name="ProductPropertyOrder" Type="int" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="AddTime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Role_User">
-          <Key>
-            <PropertyRef Name="RoleID" />
-            <PropertyRef Name="AdminID" />
-          </Key>
-          <Property Name="RoleID" Type="int" Nullable="false" />
-          <Property Name="AdminID" Type="int" Nullable="false" />
-          <Property Name="AddTime" Type="datetime" />
-        </EntityType>
         <EntityType Name="Storage">
           <Key>
             <PropertyRef Name="StorageID" />
@@ -219,34 +191,15 @@
           <Property Name="Contract" Type="nvarchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="SysMenu">
-          <Key>
-            <PropertyRef Name="ClassID" />
-          </Key>
-          <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
-          <Property Name="ClassIntro" Type="nvarchar" MaxLength="50" />
-          <Property Name="Depth" Type="int" />
-          <Property Name="ParentID" Type="int" />
-          <Property Name="ParentPath" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="SysMenu_Role">
-          <Key>
-            <PropertyRef Name="ClassID" />
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="ClassID" Type="int" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Dict_REFERENCE_DictType">
           <End Role="DictType" Type="Self.DictType" Multiplicity="0..1" />
           <End Role="Dict" Type="Self.Dict" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DictType">
-              <PropertyRef Name="TypeID" />
+              <PropertyRef Name="TypeCode" />
             </Principal>
             <Dependent Role="Dict">
-              <PropertyRef Name="TypeID" />
+              <PropertyRef Name="TypeCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,30 +335,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Role_User_REFERENCE_Admin">
-          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
-          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Admin">
-              <PropertyRef Name="AdminID" />
-            </Principal>
-            <Dependent Role="Role_User">
-              <PropertyRef Name="AdminID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Role_User_REFERENCE_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="Role_User" Type="Self.Role_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleID" />
-            </Principal>
-            <Dependent Role="Role_User">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Storage_REFERENCE_StorageType">
           <End Role="StorageType" Type="Self.StorageType" Multiplicity="0..1" />
           <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
@@ -442,32 +371,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SysMenu_Role_REFERENCE_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="SysMenu_Role" Type="Self.SysMenu_Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleID" />
-            </Principal>
-            <Dependent Role="SysMenu_Role">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SysMenu_Role_REFERENCE_SysMenu">
-          <End Role="SysMenu" Type="Self.SysMenu" Multiplicity="1" />
-          <End Role="SysMenu_Role" Type="Self.SysMenu_Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SysMenu">
-              <PropertyRef Name="ClassID" />
-            </Principal>
-            <Dependent Role="SysMenu_Role">
-              <PropertyRef Name="ClassID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="erp__ModelStoreContainer">
-          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dict" EntityType="Self.Dict" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DictType" EntityType="Self.DictType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order_Product" EntityType="Self.Order_Product" Schema="dbo" store:Type="Tables" />
@@ -479,15 +383,11 @@
           <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPresencenOrder" EntityType="Self.ProductPresencenOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductProperty" EntityType="Self.ProductProperty" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role_User" EntityType="Self.Role_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StorageLocation" EntityType="Self.StorageLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StorageRegion" EntityType="Self.StorageRegion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StorageType" EntityType="Self.StorageType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SysMenu" EntityType="Self.SysMenu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SysMenu_Role" EntityType="Self.SysMenu_Role" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Dict_REFERENCE_DictType" Association="Self.FK_Dict_REFERENCE_DictType">
             <End Role="DictType" EntitySet="DictType" />
             <End Role="Dict" EntitySet="Dict" />
@@ -536,14 +436,6 @@
             <End Role="ProductOrder" EntitySet="ProductOrder" />
             <End Role="ProductPresencenOrder" EntitySet="ProductPresencenOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_Role_User_REFERENCE_Admin" Association="Self.FK_Role_User_REFERENCE_Admin">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Role_User" EntitySet="Role_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Role_User_REFERENCE_Role" Association="Self.FK_Role_User_REFERENCE_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Role_User" EntitySet="Role_User" />
-          </AssociationSet>
           <AssociationSet Name="FK_Storage_REFERENCE_StorageType" Association="Self.FK_Storage_REFERENCE_StorageType">
             <End Role="StorageType" EntitySet="StorageType" />
             <End Role="Storage" EntitySet="Storage" />
@@ -556,22 +448,12 @@
             <End Role="Storage" EntitySet="Storage" />
             <End Role="StorageRegion" EntitySet="StorageRegion" />
           </AssociationSet>
-          <AssociationSet Name="FK_SysMenu_Role_REFERENCE_Role" Association="Self.FK_SysMenu_Role_REFERENCE_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="SysMenu_Role" EntitySet="SysMenu_Role" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SysMenu_Role_REFERENCE_SysMenu" Association="Self.FK_SysMenu_Role_REFERENCE_SysMenu">
-            <End Role="SysMenu" EntitySet="SysMenu" />
-            <End Role="SysMenu_Role" EntitySet="SysMenu_Role" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="erp__Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="erp__Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Dict" EntityType="erp__Model.Dict" />
-          <EntitySet Name="DictType" EntityType="erp__Model.DictType" />
           <EntitySet Name="Order_Product" EntityType="erp__Model.Order_Product" />
           <EntitySet Name="PresencenOrder_Product" EntityType="erp__Model.PresencenOrder_Product" />
           <EntitySet Name="Product" EntityType="erp__Model.Product" />
@@ -586,10 +468,6 @@
           <EntitySet Name="StorageRegion" EntityType="erp__Model.StorageRegion" />
           <EntitySet Name="StorageType" EntityType="erp__Model.StorageType" />
           <EntitySet Name="Supplier" EntityType="erp__Model.Supplier" />
-          <AssociationSet Name="FK_Dict_REFERENCE_DictType" Association="erp__Model.FK_Dict_REFERENCE_DictType">
-            <End Role="DictType" EntitySet="DictType" />
-            <End Role="Dict" EntitySet="Dict" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Product_REFERENCE_Product" Association="erp__Model.FK_Order_Product_REFERENCE_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Order_Product" EntitySet="Order_Product" />
@@ -646,42 +524,13 @@
             <End Role="StorageRegion" EntitySet="StorageRegion" />
             <End Role="StorageLocation" EntitySet="StorageLocation" />
           </AssociationSet>
-          <EntitySet Name="Admin" EntityType="erp__Model.Admin" />
-          <EntitySet Name="Role" EntityType="erp__Model.Role" />
-          <EntitySet Name="Role_User" EntityType="erp__Model.Role_User" />
-          <EntitySet Name="SysMenu" EntityType="erp__Model.SysMenu" />
-          <AssociationSet Name="FK_Role_User_REFERENCE_Admin" Association="erp__Model.FK_Role_User_REFERENCE_Admin">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Role_User" EntitySet="Role_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Role_User_REFERENCE_Role" Association="erp__Model.FK_Role_User_REFERENCE_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Role_User" EntitySet="Role_User" />
-          </AssociationSet>
-          <AssociationSet Name="SysMenu_Role" Association="erp__Model.SysMenu_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="SysMenu" EntitySet="SysMenu" />
+          <EntitySet Name="Dict" EntityType="erp__Model.Dict" />
+          <EntitySet Name="DictType" EntityType="erp__Model.DictType" />
+          <AssociationSet Name="FK_Dict_REFERENCE_DictType" Association="erp__Model.FK_Dict_REFERENCE_DictType">
+            <End Role="DictType" EntitySet="DictType" />
+            <End Role="Dict" EntitySet="Dict" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Dict">
-          <Key>
-            <PropertyRef Name="DictID" />
-          </Key>
-          <Property Name="DictID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeID" Type="Int32" />
-          <Property Name="DictCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DictOrder" Type="Int32" />
-          <NavigationProperty Name="DictType" Relationship="erp__Model.FK_Dict_REFERENCE_DictType" FromRole="Dict" ToRole="DictType" />
-        </EntityType>
-        <EntityType Name="DictType">
-          <Key>
-            <PropertyRef Name="TypeID" />
-          </Key>
-          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Dict" Relationship="erp__Model.FK_Dict_REFERENCE_DictType" FromRole="DictType" ToRole="Dict" />
-        </EntityType>
         <EntityType Name="Order_Product">
           <Key>
             <PropertyRef Name="ID" />
@@ -880,18 +729,6 @@
           <NavigationProperty Name="ProductClass_Supplier" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductClass_Supplier" />
           <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductOrder" />
         </EntityType>
-        <Association Name="FK_Dict_REFERENCE_DictType">
-          <End Type="erp__Model.DictType" Role="DictType" Multiplicity="0..1" />
-          <End Type="erp__Model.Dict" Role="Dict" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DictType">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="Dict">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Product_REFERENCE_Product">
           <End Type="erp__Model.Product" Role="Product" Multiplicity="0..1" />
           <End Type="erp__Model.Order_Product" Role="Order_Product" Multiplicity="*" />
@@ -1060,77 +897,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Admin">
+        <EntityType Name="Dict">
           <Key>
-            <PropertyRef Name="AdminID" />
+            <PropertyRef Name="DictCode" />
           </Key>
-          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastLoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Role_User" Relationship="erp__Model.FK_Role_User_REFERENCE_Admin" FromRole="Admin" ToRole="Role_User" />
+          <Property Name="DictCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DictOrder" Type="Int32" />
+          <NavigationProperty Name="DictType" Relationship="erp__Model.FK_Dict_REFERENCE_DictType" FromRole="Dict" ToRole="DictType" />
         </EntityType>
-        <EntityType Name="Role">
+        <EntityType Name="DictType">
           <Key>
-            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="TypeCode" />
           </Key>
-          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Role_User" Relationship="erp__Model.FK_Role_User_REFERENCE_Role" FromRole="Role" ToRole="Role_User" />
-          <NavigationProperty Name="SysMenu" Relationship="erp__Model.SysMenu_Role" FromRole="Role" ToRole="SysMenu" />
+          <Property Name="TypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dict" Relationship="erp__Model.FK_Dict_REFERENCE_DictType" FromRole="DictType" ToRole="Dict" />
         </EntityType>
-        <EntityType Name="Role_User">
-          <Key>
-            <PropertyRef Name="RoleID" />
-            <PropertyRef Name="AdminID" />
-          </Key>
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="AdminID" Type="Int32" Nullable="false" />
-          <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Admin" Relationship="erp__Model.FK_Role_User_REFERENCE_Admin" FromRole="Role_User" ToRole="Admin" />
-          <NavigationProperty Name="Role" Relationship="erp__Model.FK_Role_User_REFERENCE_Role" FromRole="Role_User" ToRole="Role" />
-        </EntityType>
-        <EntityType Name="SysMenu">
-          <Key>
-            <PropertyRef Name="ClassID" />
-          </Key>
-          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ClassIntro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Depth" Type="Int32" />
-          <Property Name="ParentID" Type="Int32" />
-          <Property Name="ParentPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="erp__Model.SysMenu_Role" FromRole="SysMenu" ToRole="Role" />
-        </EntityType>
-        <Association Name="FK_Role_User_REFERENCE_Admin">
-          <End Type="erp__Model.Admin" Role="Admin" Multiplicity="1" />
-          <End Type="erp__Model.Role_User" Role="Role_User" Multiplicity="*" />
+        <Association Name="FK_Dict_REFERENCE_DictType">
+          <End Type="erp__Model.DictType" Role="DictType" Multiplicity="0..1" />
+          <End Type="erp__Model.Dict" Role="Dict" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Admin">
-              <PropertyRef Name="AdminID" />
+            <Principal Role="DictType">
+              <PropertyRef Name="TypeCode" />
             </Principal>
-            <Dependent Role="Role_User">
-              <PropertyRef Name="AdminID" />
+            <Dependent Role="Dict">
+              <PropertyRef Name="TypeCode" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Role_User_REFERENCE_Role">
-          <End Type="erp__Model.Role" Role="Role" Multiplicity="1" />
-          <End Type="erp__Model.Role_User" Role="Role_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleID" />
-            </Principal>
-            <Dependent Role="Role_User">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SysMenu_Role">
-          <End Type="erp__Model.Role" Role="Role" Multiplicity="*" />
-          <End Type="erp__Model.SysMenu" Role="SysMenu" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1138,25 +933,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="erp__ModelStoreContainer" CdmEntityContainer="erp__Entities">
-          <EntitySetMapping Name="Dict">
-            <EntityTypeMapping TypeName="erp__Model.Dict">
-              <MappingFragment StoreEntitySet="Dict">
-                <ScalarProperty Name="DictOrder" ColumnName="DictOrder" />
-                <ScalarProperty Name="DictName" ColumnName="DictName" />
-                <ScalarProperty Name="DictCode" ColumnName="DictCode" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="DictID" ColumnName="DictID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DictType">
-            <EntityTypeMapping TypeName="erp__Model.DictType">
-              <MappingFragment StoreEntitySet="DictType">
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Order_Product">
             <EntityTypeMapping TypeName="erp__Model.Order_Product">
               <MappingFragment StoreEntitySet="Order_Product">
@@ -1340,55 +1116,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Admin">
-            <EntityTypeMapping TypeName="erp__Model.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
-                <ScalarProperty Name="LastLoginIP" ColumnName="LastLoginIP" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <EntitySetMapping Name="Dict">
+            <EntityTypeMapping TypeName="erp__Model.Dict">
+              <MappingFragment StoreEntitySet="Dict">
+                <ScalarProperty Name="DictOrder" ColumnName="DictOrder" />
+                <ScalarProperty Name="DictName" ColumnName="DictName" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="DictCode" ColumnName="DictCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="erp__Model.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <EntitySetMapping Name="DictType">
+            <EntityTypeMapping TypeName="erp__Model.DictType">
+              <MappingFragment StoreEntitySet="DictType">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Role_User">
-            <EntityTypeMapping TypeName="erp__Model.Role_User">
-              <MappingFragment StoreEntitySet="Role_User">
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SysMenu">
-            <EntityTypeMapping TypeName="erp__Model.SysMenu">
-              <MappingFragment StoreEntitySet="SysMenu">
-                <ScalarProperty Name="ParentPath" ColumnName="ParentPath" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Depth" ColumnName="Depth" />
-                <ScalarProperty Name="ClassIntro" ColumnName="ClassIntro" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="SysMenu_Role" TypeName="erp__Model.SysMenu_Role" StoreEntitySet="SysMenu_Role">
-            <EndProperty Name="SysMenu">
-              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-            </EndProperty>
-            <EndProperty Name="Role">
-              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

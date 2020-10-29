@@ -12,8 +12,8 @@ namespace ERP.ViewModel
         public int ClassID { get; set; }
         public string ClassName { get; set; }
         public string ClassIntro { get; set; }
-        public Nullable<int> Depth { get; set; }
-        public Nullable<int> ParentID { get; set; }
+        public int Depth { get; set; }
+        public int ParentID { get; set; }
         public string ParentPath { get; set; }
     }
 }

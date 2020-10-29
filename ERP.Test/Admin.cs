@@ -7,25 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ERP.Domain
+namespace ERP.Test
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SysMenu
+    public partial class Admin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SysMenu()
+        public Admin()
         {
             this.Role = new HashSet<Role>();
         }
     
-        public int ClassID { get; set; }
-        public string ClassName { get; set; }
-        public string ClassIntro { get; set; }
-        public Nullable<int> Depth { get; set; }
-        public Nullable<int> ParentID { get; set; }
-        public string ParentPath { get; set; }
+        public int AdminID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string LastLoginIP { get; set; }
+        public Nullable<System.DateTime> LastLoginTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Role> Role { get; set; }

@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ERP.Domain
+namespace ERP.Test
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Role_User
+    public partial class SysRole
     {
-        public int RoleID { get; set; }
-        public int AdminID { get; set; }
-        public Nullable<System.DateTime> AddTime { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> ClassID { get; set; }
+        public Nullable<int> RoleID { get; set; }
     
-        public virtual Admin Admin { get; set; }
         public virtual Role Role { get; set; }
+        public virtual SysClass SysClass { get; set; }
     }
 }

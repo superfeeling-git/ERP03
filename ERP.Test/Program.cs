@@ -42,7 +42,8 @@ namespace ERP.Test
 
             erp__Entities db = new erp__Entities();
 
-            db.Role.Update<Role>(m => new Role { RoleID = 1, AddTime = DateTime.Now });
+            //db.Role.Update<Role>(m => new Role { RoleID = 1, AddTime = DateTime.Now });
+
 
 
             //db.Role.Attach(new Role { });

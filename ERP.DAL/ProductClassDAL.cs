@@ -12,6 +12,14 @@ using EntityFramework.Extensions;
 
 namespace ERP.DAL
 {
+    public class test
+    {
+        public test()
+        {
+            ProductClassDAL productClassDAL = new ProductClassDAL();
+        }
+    }
+
     public class ProductClassDAL : IProductClassDAL<ProductClassModel>
     {
         erp__Entities db = new erp__Entities();
@@ -67,6 +75,7 @@ namespace ERP.DAL
 
         public int Update(ProductClassModel t)
         {
+            db.Entry<ProductClass>(db.ProductClass.Find(t.MapTo<ProductClass>().ClassID)).State = EntityState.Detached;
             db.Entry<ProductClass>(t.MapTo<ProductClass>()).State = EntityState.Modified;
             return db.SaveChanges();
         }

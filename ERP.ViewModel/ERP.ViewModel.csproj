@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminModel.cs" />
+    <Compile Include="DictModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductClassModel.cs" />
+    <Compile Include="ResultInfo.cs" />
+    <Compile Include="SupplierModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

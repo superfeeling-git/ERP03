@@ -7,26 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ERP.Domain
+namespace ERP.Test
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class SysClass
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Admin()
+        public SysClass()
         {
-            this.Role_User = new HashSet<Role_User>();
+            this.SysRole = new HashSet<SysRole>();
         }
     
-        public int AdminID { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string LastLoginIP { get; set; }
-        public Nullable<System.DateTime> LastLoginTime { get; set; }
+        public int ClassID { get; set; }
+        public string ClassName { get; set; }
+        public Nullable<int> ParentID { get; set; }
+        public Nullable<int> Depth { get; set; }
+        public string ParentPath { get; set; }
+        public string URL { get; set; }
+        public Nullable<bool> IsShow { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role_User> Role_User { get; set; }
+        public virtual ICollection<SysRole> SysRole { get; set; }
     }
 }

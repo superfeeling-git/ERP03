@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ERP.IDAL;
 using ERP.IBLL;
 using ERP.ViewModel;
+using System.Net.Http.Headers;
 
 namespace ERP.BLL
 {
@@ -89,12 +90,29 @@ namespace ERP.BLL
         /// <returns></returns>
         public int Update(ProductClassModel Model)
         {
+            //获取原始分类
+            ProductClassModel originalClassModel = productClassDAL.GetModel(Model.ClassID);
+
+            if(Model.ParentID == 0 && originalClassModel.ParentID == 0)
+            {
+                //return new ResultInfo { ErrorCode = 1, Msg = "已经是顶级分类" };
+            }
+
+            //获取目标分类
+            ProductClassModel targetClassModel = productClassDAL.GetModel(Model.ParentID);
+            if($",{targetClassModel.ParentPath},".Contains($",{Model.ClassID},"))
+            {
+                //return new ResultInfo { ErrorCode = 2, Msg = "所属不能为下级栏目" };
+            }
+
             //顶级分类
             if (Model.ParentID == 0)
             {
                 Model.ParentID = 0;
                 Model.Depth = 0;
                 Model.ParentPath = "0";
+
+                //更新子分类
             }
             else
             {
@@ -102,9 +120,14 @@ namespace ERP.BLL
 
                 Model.Depth = parentModel.Depth + 1;
                 Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
+
+                //更新子分类
+                
             }
 
-            return productClassDAL.Update(Model);
+            //return new ResultInfo { };
+
+            return 0;
         }
     }
 }

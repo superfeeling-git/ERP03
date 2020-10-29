@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PCAS</title>
+    <script src="~/Scripts/PCASClass.js"></script>
+</head>
+<body>
+    <div class="layui-input-block">
+        <div class="layui-inline city">
+            <select name="Province" id="Province">
+            </select>
+        </div>
+        <div class="layui-inline city">
+            <select name="City" id="City">
+            </select>
+        </div>
+        <div class="layui-inline city">
+            <select name="Area" id="Area">
+            </select>
+        </div>
+        <div class="layui-inline address">
+            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        new PCAS("Province", "City", "Area","河北省","保定市","")
+    </script>
+</body>
+</html>

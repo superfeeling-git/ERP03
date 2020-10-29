@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ERP.Domain
+namespace ERP.Test
 {
     using System;
     using System.Collections.Generic;
@@ -17,8 +17,7 @@ namespace ERP.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Role()
         {
-            this.Role_User = new HashSet<Role_User>();
-            this.SysMenu = new HashSet<SysMenu>();
+            this.Admin = new HashSet<Admin>();
         }
     
         public int RoleID { get; set; }
@@ -26,8 +25,6 @@ namespace ERP.Domain
         public Nullable<System.DateTime> AddTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role_User> Role_User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SysMenu> SysMenu { get; set; }
+        public virtual ICollection<Admin> Admin { get; set; }
     }
 }
