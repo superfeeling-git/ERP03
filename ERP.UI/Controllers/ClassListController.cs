@@ -24,7 +24,7 @@ namespace ERP.UI.Controllers
         /// <param name="FirstText"></param>
         /// <param name="FirstValue"></param>
         /// <returns></returns>
-        public ActionResult Index(int? selectedValue, string FirstText = "做为一级分类", int FirstValue = 0)
+        public ActionResult Index(int? selectedValue, string FirstText = "做为一级分类", int FirstValue = 0, object config = null)
         {
             //从业务逻辑层获取所有分类（菜单）数据
             List<ProductClassModel> productClassModels = productClassBLL.GetAll();
@@ -56,6 +56,8 @@ namespace ERP.UI.Controllers
 
                 items.Add(li);
             }
+
+            ViewBag.config = config;
 
             return View(items);
         }

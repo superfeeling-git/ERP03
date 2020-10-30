@@ -41,15 +41,10 @@ namespace ERP.BLL
                 ProductClassModel parentModel = ProductClassList.First(m => m.ClassID == Model.ParentID);
 
                 Model.Depth = parentModel.Depth + 1;
-                Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
+                Model.ParentPath = $"{parentModel.ParentPath },{parentModel.ClassID}";
             }
 
             return productClassDAL.Add(Model);
-        }
-
-        public int Delete(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public List<ProductClassModel> GetAll()
@@ -90,19 +85,21 @@ namespace ERP.BLL
         /// <returns></returns>
         public int Update(ProductClassModel Model)
         {
+            return productClassDAL.Update(Model);
+        }
+
+        /// <summary>
+        /// 移动分类
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ResultInfo MoveClass(ProductClassModel Model)
+        {
             //获取原始分类
             ProductClassModel originalClassModel = productClassDAL.GetModel(Model.ClassID);
-
-            if(Model.ParentID == 0 && originalClassModel.ParentID == 0)
+            if (Model.ParentID == 0 && originalClassModel.ParentID == 0)
             {
-                //return new ResultInfo { ErrorCode = 1, Msg = "已经是顶级分类" };
-            }
-
-            //获取目标分类
-            ProductClassModel targetClassModel = productClassDAL.GetModel(Model.ParentID);
-            if($",{targetClassModel.ParentPath},".Contains($",{Model.ClassID},"))
-            {
-                //return new ResultInfo { ErrorCode = 2, Msg = "所属不能为下级栏目" };
+                return new ResultInfo { ErrorCode = 1, Msg = "已经是顶级分类" };
             }
 
             //顶级分类
@@ -112,22 +109,53 @@ namespace ERP.BLL
                 Model.Depth = 0;
                 Model.ParentPath = "0";
 
+                productClassDAL.MoveClass(Model);
+
                 //更新子分类
+                UpdateChildClass(Model);
             }
             else
             {
+                //获取目标分类
+                ProductClassModel targetClassModel = productClassDAL.GetModel(Model.ParentID);
+                if ($",{targetClassModel.ParentPath},".Contains($",{Model.ClassID},"))
+                {
+                    return new ResultInfo { ErrorCode = 2, Msg = "所属不能为下级栏目" };
+                }
+
                 ProductClassModel parentModel = ProductClassList.First(m => m.ClassID == Model.ParentID);
 
                 Model.Depth = parentModel.Depth + 1;
                 Model.ParentPath = $"{parentModel.ParentPath },{Model.ClassID}";
 
                 //更新子分类
-                
+                productClassDAL.MoveClass(Model);
+
+                //更新子分类
+                UpdateChildClass(Model);
             }
+            return new ResultInfo { };
+        }
 
-            //return new ResultInfo { };
+        /// <summary>
+        /// 更新子分类
+        /// </summary>
+        private void UpdateChildClass(ProductClassModel productClassModel)
+        {
+            //替换所有的子分类
+            IEnumerable<ProductClassModel> childClass = productClassDAL.GetAll().Where(m => m.ParentID == productClassModel.ClassID);
+            foreach (var item in childClass)
+            {
+                item.Depth = productClassModel.Depth + 1;
+                item.ParentPath = $"{productClassModel.ParentPath},{productClassModel.ClassID}";
+                productClassDAL.MoveClass(item);
+                UpdateChildClass(item);
+            }
+        }
 
-            return 0;
+        public int Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

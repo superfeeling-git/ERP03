@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8d4b87b28ad44c129c48fbe051ecefda" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="8d4b87b28ad44c129c48fbe051ecefda" Name="Diagram1" ZoomLevel="133">
         <EntityTypeShape EntityType="erp__Model.Order_Product" Width="1.5" PointX="8.25" PointY="8" />
         <EntityTypeShape EntityType="erp__Model.PresencenOrder_Product" Width="1.5" PointX="8.875" PointY="12.625" />
         <EntityTypeShape EntityType="erp__Model.Product" Width="1.5" PointX="15" PointY="10.75" />
@@ -36,6 +36,11 @@
         <EntityTypeShape EntityType="erp__Model.Dict" Width="1.5" PointX="12.625" PointY="6.875" />
         <EntityTypeShape EntityType="erp__Model.DictType" Width="1.5" PointX="10.375" PointY="7.125" />
         <AssociationConnector Association="erp__Model.FK_Dict_REFERENCE_DictType" />
+        <EntityTypeShape EntityType="erp__Model.Admin" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="erp__Model.Role" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="erp__Model.SysMenu" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="erp__Model.Role_User" />
+        <AssociationConnector Association="erp__Model.SysMenu_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,6 +24,7 @@ namespace ERP.BLL
             throw new NotImplementedException();
         }
 
+
         public int Delete(int id)
         {
             throw new NotImplementedException();

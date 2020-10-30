@@ -41,5 +41,8 @@ namespace ERP.Domain
         public virtual DbSet<Supplier> Supplier { get; set; }
         public virtual DbSet<Dict> Dict { get; set; }
         public virtual DbSet<DictType> DictType { get; set; }
+        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<SysMenu> SysMenu { get; set; }
     }
 }

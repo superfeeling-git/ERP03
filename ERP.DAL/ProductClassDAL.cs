@@ -12,23 +12,9 @@ using EntityFramework.Extensions;
 
 namespace ERP.DAL
 {
-    public class test
-    {
-        public test()
-        {
-            ProductClassDAL productClassDAL = new ProductClassDAL();
-        }
-    }
-
     public class ProductClassDAL : IProductClassDAL<ProductClassModel>
     {
         erp__Entities db = new erp__Entities();
-
-        public int Add<T>(T t)
-        {
-            db.ProductClass.Add(t.MapTo<ProductClass>());
-            return db.SaveChanges();
-        }
 
         public int Add(ProductClassModel t)
         {
@@ -36,19 +22,14 @@ namespace ERP.DAL
             return db.SaveChanges();
         }
 
-        public int Delete<T>(int id)
-        {
-            return db.ProductClass.Where(m => m.ClassID == id).Delete();
-        }
-
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            return db.ProductClass.Where(m=>m.ClassID == id).Delete();
         }
 
-        public List<T> GetAll<T>()
+        public bool ExistsChildClass(int id)
         {
-            return db.ProductClass.ToList().MapToList<ProductClass, T>();
+            return db.ProductClass.Any(m => m.ParentID == id);
         }
 
         public List<ProductClassModel> GetAll()
@@ -56,28 +37,30 @@ namespace ERP.DAL
             return db.ProductClass.ToList().MapToList<ProductClass, ProductClassModel>();
         }
 
-        public T GetModel<T>(int id)
-        {
-            return db.ProductClass.Find(id).MapTo<T>();
-        }
-
         public ProductClassModel GetModel(int id)
         {
             return db.ProductClass.Find(id).MapTo<ProductClassModel>();
         }
 
-        public int Update<T>(T t)
+        public ProductClassModel getModelByParentId(int id)
         {
-            db.Entry<ProductClass>(db.ProductClass.Find(t.MapTo<ProductClass>().ClassID)).State = EntityState.Detached;
-            db.Entry<ProductClass>(t.MapTo<ProductClass>()).State = EntityState.Modified;
-            return db.SaveChanges();
+            return db.ProductClass.FirstOrDefault(m => m.ParentID == id).MapTo<ProductClassModel>();
         }
 
+        public int MoveClass(ProductClassModel productClassModel)
+        {
+            return db.ProductClass.Where(m => m.ClassID == productClassModel.ClassID).Update(m => new ProductClass { Depth = productClassModel.Depth, ParentID = productClassModel.ParentID, ParentPath = productClassModel.ParentPath });
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public int Update(ProductClassModel t)
         {
-            db.Entry<ProductClass>(db.ProductClass.Find(t.MapTo<ProductClass>().ClassID)).State = EntityState.Detached;
-            db.Entry<ProductClass>(t.MapTo<ProductClass>()).State = EntityState.Modified;
-            return db.SaveChanges();
+            return db.ProductClass.Where(m => m.ClassID == t.ClassID).Update(m => new ProductClass { ClassName = t.ClassName, ClassIntro = t.ClassIntro });
         }
+
     }
 }

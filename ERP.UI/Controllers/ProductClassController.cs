@@ -65,5 +65,45 @@ namespace ERP.UI.Controllers
         {
             return Json(productClassBLL.Update(Model), JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Move(int id)
+        {
+            IEnumerable<ProductClassModel> productClasses = productClassBLL.GetAll();
+            ProductClassModel productClassModel = productClasses.First(m => m.ClassID == id);
+            if(productClassModel.ParentID == 0)
+            {
+                ViewBag.parentClass = "顶级分类";
+            }
+            else
+            {
+                ViewBag.parentClass = productClasses.First(m => m.ClassID == productClassModel.ParentID).ClassName;
+            }
+            return View(productClasses.First(m=>m.ClassID == id));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Move(ProductClassModel productClassModel)
+        {
+            return Json(productClassBLL.MoveClass(productClassModel), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            return Json(productClassBLL.Delete(id));
+        }
     }
 }

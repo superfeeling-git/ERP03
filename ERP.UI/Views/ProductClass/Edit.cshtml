@@ -14,19 +14,19 @@
 
     <div class="layui-fluid">
         <div class="layui-card">
-            <div class="layui-card-header">分类添加</div>
+            <div class="layui-card-header">分类修改</div>
             <div class="layui-card-body" style="padding: 15px;">
                 <form class="layui-form" action="" lay-filter="component-form-group">
                     <div class="layui-form-item">
                         <label class="layui-form-label">所属分类</label>
                         <div class="layui-input-block">
-                            @Html.Action("Index", "ClassList")
+                            @Html.Action("Index", "ClassList", new { config = new { disabled = "disabled" } })
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">分类名称</label>
-                        <div class="layui-input-block">
-                            @Html.TextBoxFor(m => m.ClassName, new { lay_verify = "required", placeholder = "请输入", @class = "layui-input" })
+                        <div class="layui-input-block">                            
+                            @Html.TextBoxFor(m => m.ClassName, new { lay_verify = "required", placeholder = "请输入", @class = "layui-input"})
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="/layuiadmin/layui/layui.js"></script>
     <script>
       layui.config({
@@ -58,12 +58,9 @@
       }).extend({
         index: 'lib/index' //主入口模块
       }).use(['index', 'form'], function(){
-        var $ = layui.$
-        ,admin = layui.admin
+        var admin = layui.admin
         ,element = layui.element
         , form = layui.form;
-
-
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function(data){

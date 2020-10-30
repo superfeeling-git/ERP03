@@ -10,5 +10,6 @@ namespace ERP.IBLL
     public interface IProductClassBLL<T> : IBaseAction<T>
         where T : class, new()
     {
+        ResultInfo MoveClass(T Model);
     }
 }
