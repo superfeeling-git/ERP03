@@ -12,23 +12,20 @@ namespace ERP.Test
     using System;
     using System.Collections.Generic;
     
-    public partial class SysClass
+    public partial class ProductPresencenOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SysClass()
+        public ProductPresencenOrder()
         {
-            this.SysRole = new HashSet<SysRole>();
+            this.PresencenOrder_Product = new HashSet<PresencenOrder_Product>();
         }
     
-        public int ClassID { get; set; }
-        public string ClassName { get; set; }
-        public Nullable<int> ParentID { get; set; }
-        public Nullable<int> Depth { get; set; }
-        public string ParentPath { get; set; }
-        public string URL { get; set; }
-        public Nullable<bool> IsShow { get; set; }
+        public int PresencenOrderID { get; set; }
+        public int OrderID { get; set; }
+        public string PresencenOrderCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SysRole> SysRole { get; set; }
+        public virtual ICollection<PresencenOrder_Product> PresencenOrder_Product { get; set; }
+        public virtual ProductOrder ProductOrder { get; set; }
     }
 }

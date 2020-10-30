@@ -13,10 +13,10 @@ namespace ERP.Test
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Project_1803Entities : DbContext
+    public partial class erp__Entities : DbContext
     {
-        public Project_1803Entities()
-            : base("name=Project_1803Entities")
+        public erp__Entities()
+            : base("name=erp__Entities")
         {
         }
     
@@ -25,8 +25,24 @@ namespace ERP.Test
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Dict> Dict { get; set; }
+        public virtual DbSet<DictType> DictType { get; set; }
+        public virtual DbSet<Order_Product> Order_Product { get; set; }
+        public virtual DbSet<PresencenOrder_Product> PresencenOrder_Product { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Product_ProductProperty> Product_ProductProperty { get; set; }
+        public virtual DbSet<ProductClass> ProductClass { get; set; }
+        public virtual DbSet<ProductClass_Supplier> ProductClass_Supplier { get; set; }
+        public virtual DbSet<ProductOrder> ProductOrder { get; set; }
+        public virtual DbSet<ProductPresencenOrder> ProductPresencenOrder { get; set; }
+        public virtual DbSet<ProductProperty> ProductProperty { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<SysClass> SysClass { get; set; }
-        public virtual DbSet<SysRole> SysRole { get; set; }
+        public virtual DbSet<Storage> Storage { get; set; }
+        public virtual DbSet<StorageLocation> StorageLocation { get; set; }
+        public virtual DbSet<StorageRegion> StorageRegion { get; set; }
+        public virtual DbSet<StorageType> StorageType { get; set; }
+        public virtual DbSet<Supplier> Supplier { get; set; }
+        public virtual DbSet<SysMenu> SysMenu { get; set; }
     }
 }

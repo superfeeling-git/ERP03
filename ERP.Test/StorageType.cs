@@ -12,22 +12,21 @@ namespace ERP.Test
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class StorageType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
+        public StorageType()
         {
-            this.Admin = new HashSet<Admin>();
-            this.SysMenu = new HashSet<SysMenu>();
+            this.Storage = new HashSet<Storage>();
         }
     
-        public int RoleID { get; set; }
-        public string RoleName { get; set; }
-        public Nullable<System.DateTime> AddTime { get; set; }
+        public int StorageTypeID { get; set; }
+        public string StorageTypeName { get; set; }
+        public string Remark { get; set; }
+        public Nullable<System.DateTime> LastEditTime { get; set; }
+        public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Admin> Admin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SysMenu> SysMenu { get; set; }
+        public virtual ICollection<Storage> Storage { get; set; }
     }
 }

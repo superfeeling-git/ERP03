@@ -40,8 +40,22 @@ namespace ERP.Test
             //}
             #endregion
 
-            erp__Entities db = new erp__Entities();
+            //erp__Entities db = new erp__Entities();
 
+            ////Console.WriteLine("A001".TrimEnd(','));
+
+            //Console.ReadLine();
+
+            //string Prefix = "GY";
+
+            //for (int i = 65; i < 65 + 26; i++)
+            //{
+            //    Console.WriteLine((char)i);
+            //}
+
+            //Console.WriteLine("1".PadLeft(4, '0'));
+
+            #region MyRegion
             //db.Role.Update<Role>(m => new Role { RoleID = 1, AddTime = DateTime.Now });
 
 
@@ -59,8 +73,95 @@ namespace ERP.Test
             //{
             //    Console.WriteLine(item.GetValue(person));
             //}
+            #endregion
+
+            //Console.WriteLine(Generator("GY", "A999", 3, true));
+
+            //Console.WriteLine('A'.GetType());
+
+            //A001
+            //001
+
+            //Console.WriteLine(char.IsLetter('A'));
+            //Console.WriteLine(char.IsLetter('0'));
+
+            Console.WriteLine(Generator("SL", "9999"));
 
             Console.Read();
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Pre">GY</param>
+        /// <param name="Code">A001/001</param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        static string Generator(string Pre, string Code)
+        {
+            //第1个字符
+            char firstChar = Code[0];
+
+            //如果第1位是字母 A001
+            if(char.IsLetter(firstChar))
+            {
+                int MaxNum = Convert.ToInt32(Code.TrimStart(firstChar));
+
+                //判断字母是否增位
+                //999  3
+                if((MaxNum + 1).ToString().Length > Code.Length - 1)
+                {
+                    return $"{Pre}{(char)((byte)firstChar + 1)}{"1".PadLeft(Code.Length - 1, '0')}";
+                }
+                else
+                {
+                    return $"{Pre}{firstChar}{(MaxNum + 1).ToString().PadLeft(Code.Length - 1, '0')}";
+                }
+            }
+            else
+            {
+                return $"{Pre}{(Convert.ToInt32(Code) + 1).ToString().PadLeft(Code.Length, '0')}";
+            }
+        }
+
+
+        /// <summary>
+        /// 生成编码
+        /// </summary>
+        /// <param name="Pre"></param>
+        /// <param name="Code">数据库获取的最大编号</param>
+        /// <param name="len">数字部分的长度</param>
+        /// <param name="IsIdentity">是否存在字母增位</param>
+        /// <returns></returns>
+        static string Generator(string Pre, string Code, int len, bool IsIdentity)
+        {
+            //如果Code为NULL的空，返回GY A 001
+            if (string.IsNullOrWhiteSpace(Code))
+            {
+                Code = "A" + "1".PadLeft(len, '0');
+            }
+            else
+            {
+                //存在字母增位
+                if (IsIdentity)
+                {
+                    int number = Convert.ToInt32(Code.Substring(1, len));
+                    if (number < Convert.ToInt32("9".PadLeft(len, '9')))
+                    {
+                        Code = Code.Substring(0, 1) + (number + 1).ToString().PadLeft(len, '0');
+                    }
+                    else
+                    {
+                        Code = (Convert.ToByte(Code.Substring(0, 1)) + 1).ToString() + (number + 1).ToString().PadLeft(len, '0');
+                    }
+                }
+                else
+                {
+                    Code = Code.Substring(0, 1) + (Convert.ToInt32(Code.Substring(1, len)) + 1);
+                }
+            }
+            return Pre + Code;
         }
     }
 

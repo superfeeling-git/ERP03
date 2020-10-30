@@ -12,22 +12,21 @@ namespace ERP.Test
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class ProductProperty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
+        public ProductProperty()
         {
-            this.Admin = new HashSet<Admin>();
-            this.SysMenu = new HashSet<SysMenu>();
+            this.Product_ProductProperty = new HashSet<Product_ProductProperty>();
         }
     
-        public int RoleID { get; set; }
-        public string RoleName { get; set; }
-        public Nullable<System.DateTime> AddTime { get; set; }
+        public int ProductPropertyID { get; set; }
+        public string ProductPropertyCode { get; set; }
+        public string ProductPropertyName { get; set; }
+        public string ProductPropertyIntro { get; set; }
+        public Nullable<int> ProductPropertyOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Admin> Admin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SysMenu> SysMenu { get; set; }
+        public virtual ICollection<Product_ProductProperty> Product_ProductProperty { get; set; }
     }
 }

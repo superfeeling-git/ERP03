@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AutoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -12,13 +12,13 @@ namespace ERP.Test
     using System;
     using System.Collections.Generic;
     
-    public partial class SysRole
+    public partial class Product_ProductProperty
     {
-        public int ID { get; set; }
-        public Nullable<int> ClassID { get; set; }
-        public Nullable<int> RoleID { get; set; }
+        public int ProductID { get; set; }
+        public int ProductPropertyID { get; set; }
+        public string ProductPropertyVal { get; set; }
     
-        public virtual Role Role { get; set; }
-        public virtual SysClass SysClass { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual ProductProperty ProductProperty { get; set; }
     }
 }
