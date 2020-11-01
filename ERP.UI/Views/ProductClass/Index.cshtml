@@ -55,13 +55,13 @@
                                         </td>
                                         <td>@item.ClassIntro</td>
                                         <td>
-                                            <a class="layui-btn layui-btn-xs" href="@Url.Action("Create",new { id = item.ClassID })"><i class="layui-icon layui-icon-addition"></i>添加</a>
-                                            <a class="layui-btn layui-btn-xs layui-btn-normal" href="@Url.Action("Edit",new { id = item.ClassID })"><i class="layui-icon layui-icon-male"></i>修改</a>
-                                            <a class="layui-btn layui-btn-xs layui-btn-warm" href="@Url.Action("Move",new { id = item.ClassID })"><i class="layui-icon layui-icon-set-sm"></i>移动</a>
-                                            <a class="layui-btn layui-btn-xs layui-btn-danger" href="@Url.Action("Delete",new { id = item.ClassID })"><i class="layui-icon layui-icon-face-smile"></i>删除</a>
+                                            <a class="layui-btn layui-btn-xs" href="@Url.Action("Create", new { id = item.ClassID })"><i class="layui-icon layui-icon-addition"></i>添加</a>
+                                            <a class="layui-btn layui-btn-xs layui-btn-normal" href="@Url.Action("Edit", new { id = item.ClassID })"><i class="layui-icon layui-icon-male"></i>修改</a>
+                                            <a class="layui-btn layui-btn-xs layui-btn-warm" href="@Url.Action("Move", new { id = item.ClassID })"><i class="layui-icon layui-icon-set-sm"></i>移动</a>
+                                            <a class="layui-btn layui-btn-xs layui-btn-danger delete" href="javascript:void(0)" id="@item.ClassID"><i class="layui-icon layui-icon-face-smile"></i>删除</a>
                                         </td>
                                     </tr>
-                                }
+                                                }
                             </tbody>
                         </table>
                     </div>
@@ -75,8 +75,35 @@
   layui.config({
     base: '/layuiadmin/' //静态资源所在路径
   }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index']);
+      index: 'lib/index' //主入口模块
+  }).use(['index', 'layer'], function () {
+      var $ = layui.$;
+
+
+      $(".delete").click(function () {
+          var id = $(this).attr("id");
+
+          layer.confirm('确认删除吗？', function (index) {
+              $.ajax({
+                  url: "@Url.Action("Delete")",
+                  type: "get",
+                  dataType: "json",
+                  data: {id:id},
+                  success: function (d) {
+                      layer.msg(d.Msg, {
+                          icon: 1,
+                          time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                      }, function () {
+                              if (d.ErrorCode == 0) {
+                                  window.location.reload();
+                              }
+                      });
+                  }
+              })
+          });
+
+      });
+  });
     </script>
 </body>
 </html>

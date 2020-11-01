@@ -22,7 +22,7 @@ namespace ERP.IDAL
         /// <returns></returns>
         T getModelByParentId(int id);
         /// <summary>
-        /// 根据父ID获取实体
+        /// 根据父ID判断有无子分类
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

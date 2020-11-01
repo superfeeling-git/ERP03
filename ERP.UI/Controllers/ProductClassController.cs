@@ -103,7 +103,7 @@ namespace ERP.UI.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            return Json(productClassBLL.Delete(id));
+            return Json(productClassBLL.Delete<ResultInfo>(id), JsonRequestBehavior.AllowGet);
         }
     }
 }

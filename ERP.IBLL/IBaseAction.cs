@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERP.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace ERP.IBLL
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        int Delete(int id);
+        TResult Delete<TResult>(int id)
+            where TResult : ResultInfo,new();
         /// <summary>
         /// 获取单条实体
         /// </summary>

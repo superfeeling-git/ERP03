@@ -153,9 +153,21 @@ namespace ERP.BLL
             }
         }
 
-        public int Delete(int id)
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TResult Delete<TResult>(int id) where TResult : ResultInfo, new()
         {
-            throw new NotImplementedException();
+            if(productClassDAL.ExistsChildClass(id))
+            {
+                return new TResult { ErrorCode = 1, Msg = "还存在子分类" };
+            }
+
+            productClassDAL.Delete(id);
+            return new TResult { ErrorCode = 0, Msg = "删除成功" };
         }
     }
 }

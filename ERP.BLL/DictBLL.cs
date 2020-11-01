@@ -24,8 +24,7 @@ namespace ERP.BLL
             throw new NotImplementedException();
         }
 
-
-        public int Delete(int id)
+        public TResult Delete<TResult>(int id) where TResult : ResultInfo, new()
         {
             throw new NotImplementedException();
         }
