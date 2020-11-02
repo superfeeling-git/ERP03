@@ -22,5 +22,12 @@ namespace ERP.Utility
             IMapper mapper = config.CreateMapper();
             return mapper.Map<IEnumerable<TSource>, List<TDestination>>(objList);
         }
+
+        public static IEnumerable<TDestination> MapToIEnumerable<TSource, TDestination>(this IEnumerable<TSource> objList)
+        {
+            MapperConfiguration config = new MapperConfiguration(m => m.CreateMap<TSource, TDestination>());
+            IMapper mapper = config.CreateMapper();
+            return mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(objList);
+        }
     }
 }

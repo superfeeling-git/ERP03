@@ -178,6 +178,10 @@
       <Project>{1acec049-83d5-4f0f-9a33-5e6e93264816}</Project>
       <Name>ERP.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ERP.Utility\ERP.Utility.csproj">
+      <Project>{0bc7829e-bd39-4ef2-9767-0bbaa66e730c}</Project>
+      <Name>ERP.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ERP.ViewModel\ERP.ViewModel.csproj">
       <Project>{7c20c3a6-9544-4515-9cf3-e472a5934c92}</Project>
       <Name>ERP.ViewModel</Name>

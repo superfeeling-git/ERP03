@@ -158,7 +158,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductClassController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
-    <Compile Include="Controllers\UploadFileController.cs" />
+    <Compile Include="Controllers\UploadFilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -698,6 +698,19 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PCASClass.js" />
+    <Content Include="UploadFile\image\20201029\20201029143422_599.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145204_837.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145431_762.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145524_706.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145546_498.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145748_134.png" />
+    <Content Include="UploadFile\image\20201029\20201029145814_461.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145843_535.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145843_538.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029145843_541.jpg" />
+    <Content Include="UploadFile\image\20201029\20201029150406_149.png" />
+    <Content Include="UploadFile\image\20201029\20201029151000_081.jpg" />
+    <Content Include="UploadFile\image\20201102\20201102112552_880.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

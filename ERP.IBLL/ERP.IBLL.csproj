@@ -44,6 +44,7 @@
     <Compile Include="IBaseAction.cs" />
     <Compile Include="IDictBLL.cs" />
     <Compile Include="IProductClassBLL.cs" />
+    <Compile Include="ISupplierBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

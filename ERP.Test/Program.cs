@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Data.Entity;
 using ERP.Domain;
 using EntityFramework.Extensions;
+using ERP.Utility;
 
 namespace ERP.Test
 {
@@ -17,6 +18,52 @@ namespace ERP.Test
     {
         static void Main(string[] args)
         {
+            erp__Entities db = new erp__Entities();
+
+            Supplier supplier = new Supplier { SupplierName = "Test" };
+
+            int[] ClassID = new int[] { 21, 22, 23 };
+
+            List<ProductClass_Supplier> productClass_Suppliers = ClassID.MapToList<int, ProductClass_Supplier>();            
+
+            supplier.ProductClass_Supplier = productClass_Suppliers;
+
+            db.Supplier.Add(supplier);
+
+            db.SaveChanges();
+
+
+
+            //db.Supplier.Add(new Supplier { }).ProductClass_Supplier
+
+
+
+            //IEnumerable<SupplierModel> suppliers = db.Supplier.AsEnumerable().MapToIEnumerable<Supplier, SupplierModel>();
+            //foreach (var item in suppliers)
+            //{
+            //    Console.WriteLine(item.SupplierName);
+            //}
+
+            //Supplier supplier = new Supplier { SupplierName = "供应商主键获取测试" };
+
+            //IList<ProductClass_Supplier> productClass_Suppliers = new List<ProductClass_Supplier>();
+            //productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 21  });
+            //productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 22  });
+            //productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 23  });
+
+            //supplier.ProductClass_Supplier = productClass_Suppliers;
+
+            //db.Entry<Supplier>(supplier).State = System.Data.Entity.EntityState.Added;
+
+            //Console.WriteLine($"保存前：{supplier.SupplierID}");
+
+            //db.Supplier.Add(supplier);
+
+            //db.SaveChanges();
+
+            //Console.WriteLine($"保存后：{supplier.SupplierID}");
+
+
             #region MyRegion
             ////AdminBLL adminBLL = new AdminBLL();
             ////adminBLL.Add(new AdminModel { AddTime = DateTime.Now, AdminId = 1, Password = Guid.NewGuid().ToString(), UserName = "Admin" });
@@ -85,7 +132,7 @@ namespace ERP.Test
             //Console.WriteLine(char.IsLetter('A'));
             //Console.WriteLine(char.IsLetter('0'));
 
-            Console.WriteLine(Generator("SL", "9999"));
+            //Console.WriteLine(Generator("SL", "9999"));
 
             Console.Read();
 

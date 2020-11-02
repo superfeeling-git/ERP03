@@ -12,11 +12,17 @@ namespace ERP.UI.Controllers
     {
         private IDictBLL<DictModel> dictBLL;
         private IProductClassBLL<ProductClassModel> productClassBLL;
+        private ISupplierBLL<SupplierModel> supplierBLL;
 
-        public SupplierController(IDictBLL<DictModel> _dictBLL, IProductClassBLL<ProductClassModel> _productClassBLL)
+        public SupplierController(
+            IDictBLL<DictModel> _dictBLL, 
+            IProductClassBLL<ProductClassModel> _productClassBLL,
+            ISupplierBLL<SupplierModel> _supplierBLL
+            )
         {
             this.dictBLL = _dictBLL;
             this.productClassBLL = _productClassBLL;
+            this.supplierBLL = _supplierBLL;
         }
 
         // GET: Supplier
@@ -40,7 +46,7 @@ namespace ERP.UI.Controllers
         [HttpPost]
         public ActionResult Create(SupplierModel supplierModel)
         {
-            return Json(new { }, JsonRequestBehavior.AllowGet);
+            return Json(supplierBLL.Add(supplierModel), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
