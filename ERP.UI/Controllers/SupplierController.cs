@@ -26,8 +26,21 @@ namespace ERP.UI.Controllers
         }
 
         // GET: Supplier
-        public ActionResult Index()
+        public ActionResult Index(SupplierQueryModel supplierQueryModel, int page = 1)
         {
+            ViewBag.Dict = dictBLL.GetAll();
+            if (Request.IsAjaxRequest())
+            { 
+                PageListModel<SupplierModel> pageListModel  = supplierBLL.PageList(page, 6, supplierQueryModel);
+                return Json(new
+                {
+                    code = 0,
+                    msg = "",
+                    count = pageListModel.TotalCount,
+                    data = pageListModel.PageList
+                },JsonRequestBehavior.AllowGet);
+
+            }
             return View();
         }
 

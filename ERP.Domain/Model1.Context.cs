@@ -38,11 +38,11 @@ namespace ERP.Domain
         public virtual DbSet<StorageLocation> StorageLocation { get; set; }
         public virtual DbSet<StorageRegion> StorageRegion { get; set; }
         public virtual DbSet<StorageType> StorageType { get; set; }
-        public virtual DbSet<Supplier> Supplier { get; set; }
         public virtual DbSet<Dict> Dict { get; set; }
         public virtual DbSet<DictType> DictType { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<SysMenu> SysMenu { get; set; }
+        public virtual DbSet<Supplier> Supplier { get; set; }
     }
 }

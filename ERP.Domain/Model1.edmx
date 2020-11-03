@@ -203,7 +203,7 @@
           </Key>
           <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SupplierLevel" Type="nvarchar" MaxLength="50" />
-          <Property Name="SupplierCode" Type="char" MaxLength="10" />
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
           <Property Name="Contact" Type="nvarchar" MaxLength="50" />
           <Property Name="TEL" Type="nvarchar" MaxLength="50" />
@@ -581,7 +581,6 @@
           <EntitySet Name="StorageLocation" EntityType="erp__Model.StorageLocation" />
           <EntitySet Name="StorageRegion" EntityType="erp__Model.StorageRegion" />
           <EntitySet Name="StorageType" EntityType="erp__Model.StorageType" />
-          <EntitySet Name="Supplier" EntityType="erp__Model.Supplier" />
           <AssociationSet Name="FK_Order_Product_REFERENCE_Product" Association="erp__Model.FK_Order_Product_REFERENCE_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Order_Product" EntitySet="Order_Product" />
@@ -610,16 +609,8 @@
             <End Role="ProductClass" EntitySet="ProductClass" />
             <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductClass_Supplier_REFERENCE_Supplier" Association="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductOrder_REFERENCE_Storage" Association="erp__Model.FK_ProductOrder_REFERENCE_Storage">
             <End Role="Storage" EntitySet="Storage" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrder_REFERENCE_Supplier" Association="erp__Model.FK_ProductOrder_REFERENCE_Supplier">
-            <End Role="Supplier" EntitySet="Supplier" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductPresencenOrder_REFERENCE_ProductOrder" Association="erp__Model.FK_ProductPresencenOrder_REFERENCE_ProductOrder">
@@ -654,6 +645,15 @@
           <AssociationSet Name="SysMenu_Role" Association="erp__Model.SysMenu_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="SysMenu" EntitySet="SysMenu" />
+          </AssociationSet>
+          <EntitySet Name="Supplier" EntityType="erp__Model.Supplier" />
+          <AssociationSet Name="FK_ProductClass_Supplier_REFERENCE_Supplier" Association="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_REFERENCE_Supplier" Association="erp__Model.FK_ProductOrder_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Order_Product">
@@ -749,8 +749,8 @@
           <Property Name="AuditUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Order_Product" Relationship="erp__Model.FK_Order_Product_REFERENCE_ProductOrder" FromRole="ProductOrder" ToRole="Order_Product" />
           <NavigationProperty Name="Storage" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Storage" FromRole="ProductOrder" ToRole="Storage" />
-          <NavigationProperty Name="Supplier" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="ProductOrder" ToRole="Supplier" />
           <NavigationProperty Name="ProductPresencenOrder" Relationship="erp__Model.FK_ProductPresencenOrder_REFERENCE_ProductOrder" FromRole="ProductOrder" ToRole="ProductPresencenOrder" />
+          <NavigationProperty Name="Supplier" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="ProductOrder" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="ProductPresencenOrder">
           <Key>
@@ -831,28 +831,6 @@
           <Property Name="LastEditTime" Type="DateTime" Precision="3" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Storage" Relationship="erp__Model.FK_Storage_REFERENCE_StorageType" FromRole="StorageType" ToRole="Storage" />
-        </EntityType>
-        <EntityType Name="Supplier">
-          <Key>
-            <PropertyRef Name="SupplierID" />
-          </Key>
-          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Contract" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ProductClass_Supplier" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductClass_Supplier" />
-          <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductOrder" />
         </EntityType>
         <Association Name="FK_Order_Product_REFERENCE_Product">
           <End Type="erp__Model.Product" Role="Product" Multiplicity="0..1" />
@@ -938,18 +916,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductClass_Supplier_REFERENCE_Supplier">
-          <End Type="erp__Model.Supplier" Role="Supplier" Multiplicity="0..1" />
-          <End Type="erp__Model.ProductClass_Supplier" Role="ProductClass_Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="ProductClass_Supplier">
-              <PropertyRef Name="SupplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductOrder_REFERENCE_Storage">
           <End Type="erp__Model.Storage" Role="Storage" Multiplicity="0..1" />
           <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="*" />
@@ -959,18 +925,6 @@
             </Principal>
             <Dependent Role="ProductOrder">
               <PropertyRef Name="StorageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductOrder_REFERENCE_Supplier">
-          <End Type="erp__Model.Supplier" Role="Supplier" Multiplicity="0..1" />
-          <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="ProductOrder">
-              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1092,6 +1046,52 @@
         <Association Name="SysMenu_Role">
           <End Type="erp__Model.Role" Role="Role" Multiplicity="*" />
           <End Type="erp__Model.SysMenu" Role="SysMenu" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Contract" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ProductClass_Supplier" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductClass_Supplier" />
+          <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductOrder" />
+        </EntityType>
+        <Association Name="FK_ProductClass_Supplier_REFERENCE_Supplier">
+          <End Type="erp__Model.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="erp__Model.ProductClass_Supplier" Role="ProductClass_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="ProductClass_Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOrder_REFERENCE_Supplier">
+          <End Type="erp__Model.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1261,27 +1261,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Supplier">
-            <EntityTypeMapping TypeName="erp__Model.Supplier">
-              <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="Contract" ColumnName="Contract" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="PayType" ColumnName="PayType" />
-                <ScalarProperty Name="SupplierState" ColumnName="SupplierState" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="TEL" ColumnName="TEL" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="SupplierLevel" ColumnName="SupplierLevel" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Dict">
             <EntityTypeMapping TypeName="erp__Model.Dict">
               <MappingFragment StoreEntitySet="Dict">
@@ -1348,6 +1327,27 @@
               <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="erp__Model.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="SupplierState" ColumnName="SupplierState" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierLevel" ColumnName="SupplierLevel" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

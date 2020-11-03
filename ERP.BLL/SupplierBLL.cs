@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERP.Utility;
 using ERP.IDAL;
 using ERP.IBLL;
 using ERP.ViewModel;
@@ -20,6 +21,14 @@ namespace ERP.BLL
 
         public int Add(SupplierModel Model)
         {
+            Model.AddTime = DateTime.Now;
+
+            SupplierModel Entity = supplierDAL.getMaxCode();
+            if (Entity == null)
+                Model.SupplierCode = "GYA001";
+            else
+                Model.SupplierCode = "GY".Generator(Entity.SupplierCode.Replace("GY",""));
+
             return supplierDAL.Add(Model);
         }
 
@@ -36,6 +45,18 @@ namespace ERP.BLL
         public SupplierModel GetModel(int id)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="PageIndex"></param>
+        /// <param name="PageSize"></param>
+        /// <param name="supplierQueryModel"></param>
+        /// <returns></returns>
+        public PageListModel<SupplierModel> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel)
+        {
+            return supplierDAL.PageList(PageIndex, PageSize, supplierQueryModel);
         }
 
         public int Update(SupplierModel Model)

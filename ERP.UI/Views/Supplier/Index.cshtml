@@ -1,0 +1,112 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>数据表格的重载 - 数据表格</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+    @{ IEnumerable<DictModel> dictList = ViewBag.Dict as IEnumerable<DictModel>; }
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">供应商列表</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" action="" lay-filter="component-form-demo1">
+                            <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">供应商名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="SupplierName" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">联系人</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="Contact" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">手机号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="Phone" class="layui-input">
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">供应商状态</label>
+                                        <div class="layui-input-inline">
+                                            <select name="State">
+                                                <option value="">--请选择--</option>
+                                                @foreach (var item in dictList.Where(m => m.TypeCode == "State").OrderBy(m => m.DictOrder))
+                                                {
+                                                    <option value="@item.DictCode">@item.DictName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">搜索</button>
+                            </div>
+                        </form>
+                            <table class="layui-hide" id="test-table-reload" lay-filter="user"></table>
+
+                            <blockquote class="layui-elem-quote">此处由于是静态模拟数据，所以搜索后重载的结果没变，这并非是 BUG。实际使用时改成真实接口并根据搜索的字段筛选出对应的数据即可。</blockquote>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script>
+          layui.config({
+            base: '/layuiadmin/' //静态资源所在路径
+          }).extend({
+            index: 'lib/index' //主入口模块
+          }).use(['index', 'table', 'form'], function(){
+              var table = layui.table;
+              var form = layui.form;
+
+            //方法级渲染
+              var tableIns = table.render({
+                              elem: '#test-table-reload'
+                              ,url: "@Url.Action("Index")"
+                              ,cols: [[
+                                    {checkbox: true, fixed: true}
+                                  , { field:'SupplierCode', title: '供应商编号', sort: true, fixed: true}
+                                  , { field: 'SupplierName', title: '供应商名称'}
+                                  , { field: 'SupplierLevel', title: '供应商等级', sort: true}
+                                  , { field:'Contact', title: '联系人'}
+                                  , { field:'Phone', title: '手机号'}
+                                  , { field:'SupplierState', title: '供应商状态', sort: true}
+                                  , {field:'score', title: '操作', sort: true, width:80}
+                              ]]
+                              ,page: true
+                            });
+
+              /* 监听提交 */
+              form.on('submit(component-form-demo1)', function (data) {
+                  //console.log(data.field);
+                  var d = data.field;
+                  tableIns.reload({
+                      where: { //设定异步数据接口的额外参数，任意设
+                          d
+                      }
+                      , page: {
+                          curr: 1 //重新从第 1 页开始
+                      }
+                  });
+                return false;
+            });
+          });
+    </script>
+</body>
+</html>

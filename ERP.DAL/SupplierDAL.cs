@@ -30,7 +30,7 @@ namespace ERP.DAL
             #endregion
 
             #region 中间表方式
-            /*
+
             Supplier supplier = Model.MapTo<Supplier>();
 
             List<ProductClass_Supplier> productClass_Suppliers = new List<ProductClass_Supplier>();
@@ -45,9 +45,10 @@ namespace ERP.DAL
             db.Supplier.Add(supplier);
 
             db.SaveChanges();
-            */
+
             #endregion
 
+            /*
             List<ProductClass_SupplierModel> productClass_SupplierModels = new List<ProductClass_SupplierModel>();
 
             foreach (var item in Model.ClassID)
@@ -67,6 +68,7 @@ namespace ERP.DAL
             Supplier supplier = mapper.Map<SupplierModel, Supplier>(Model);
 
             db.Supplier.Add(supplier);
+            */
 
             db.SaveChanges();
 
@@ -92,9 +94,49 @@ namespace ERP.DAL
             throw new NotImplementedException();
         }
 
+        public SupplierModel getMaxCode()
+        {
+            var Entity = db.Supplier.OrderByDescending(m => m.SupplierID).FirstOrDefault();
+            return Entity.MapTo<SupplierModel>();
+        }
+
         public SupplierModel GetModel(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public PageListModel<SupplierModel> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel)
+        {
+            var query = db.Supplier.Join(db.Dict, a => a.SupplierLevel, b => b.DictCode, (a, b) => new { a,b })
+                .Join(db.Dict,d => d.a.SupplierState  ,b => b.DictCode, (d,b) => new SupplierModel {
+                    SupplierID = d.a.SupplierID,
+                    Phone = d.a.Phone,
+                    SupplierLevel = d.b.DictName,
+                    AddTime = d.a.AddTime,
+                    SupplierCode = d.a.SupplierCode,
+                    Contact = d.a.Contact,
+                    SupplierState = b.DictName,
+                    SupplierName = d.a.SupplierName
+                });
+
+
+            if (!string.IsNullOrWhiteSpace(supplierQueryModel.SupplierName))
+                query = query.Where(m => m.SupplierName.Contains(supplierQueryModel.SupplierName));
+            if (!string.IsNullOrWhiteSpace(supplierQueryModel.Phone))
+                query = query.Where(m => m.Phone == supplierQueryModel.Phone);
+            if (!string.IsNullOrWhiteSpace(supplierQueryModel.Contact))
+                query = query.Where(m => m.Contact == supplierQueryModel.Contact);
+            if (!string.IsNullOrWhiteSpace(supplierQueryModel.State))
+                query = query.Where(m => m.SupplierState == supplierQueryModel.State);
+
+            //要返回的数据封装
+            PageListModel<SupplierModel> pageListModel = new PageListModel<SupplierModel>();
+
+            pageListModel.TotalCount = query.Count();
+
+            pageListModel.PageList = query.OrderBy(m => m.SupplierID).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+
+            return pageListModel;
         }
 
         public int Update(SupplierModel t)

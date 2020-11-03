@@ -24,6 +24,6 @@ namespace ERP.ViewModel
         public string Contract { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
         public int[] ClassID { get; set; }
-        public virtual ICollection<ProductClass_SupplierModel> ProductClass_Supplier { get; set; }
+        //public virtual ICollection<ProductClass_SupplierModel> ProductClass_Supplier { get; set; }
     }
 }

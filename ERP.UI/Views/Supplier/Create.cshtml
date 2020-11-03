@@ -299,7 +299,12 @@
                     dataType: "json",
                     data: $("form").serialize(),
                     success: function (d) {
-
+                        layer.msg("添加成功", {
+                            icon: 1,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function () {
+                            window.location.href = "@Url.Action()";
+                        })
                     }
                 })  
                 return false;

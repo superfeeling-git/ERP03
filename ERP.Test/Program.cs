@@ -18,19 +18,30 @@ namespace ERP.Test
     {
         static void Main(string[] args)
         {
-            erp__Entities db = new erp__Entities();
+            //erp__Entities db = new erp__Entities();
 
-            Supplier supplier = new Supplier { SupplierName = "Test" };
+            //Console.WriteLine(db.Admin.Last().UserName);
 
-            int[] ClassID = new int[] { 21, 22, 23 };
+            int[] ClassID = new int[] { 1,2,3, 5 };
 
-            List<ProductClass_Supplier> productClass_Suppliers = ClassID.MapToList<int, ProductClass_Supplier>();            
+            Console.WriteLine(ClassID.Last());
 
-            supplier.ProductClass_Supplier = productClass_Suppliers;
+            Console.ReadLine();
 
-            db.Supplier.Add(supplier);
 
-            db.SaveChanges();
+
+
+            //Supplier supplier = new Supplier { SupplierName = "Test" };
+
+            //int[] ClassID = new int[] { 21, 22, 23 };
+
+            //List<ProductClass_Supplier> productClass_Suppliers = ClassID.MapToList<int, ProductClass_Supplier>();            
+
+            //supplier.ProductClass_Supplier = productClass_Suppliers;
+
+            //db.Supplier.Add(supplier);
+
+            //db.SaveChanges();
 
 
 

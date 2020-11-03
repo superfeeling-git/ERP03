@@ -55,6 +55,10 @@
       <Project>{fa65e508-be96-46b5-82c7-5b57fb340bdd}</Project>
       <Name>ERP.IDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ERP.Utility\ERP.Utility.csproj">
+      <Project>{0bc7829e-bd39-4ef2-9767-0bbaa66e730c}</Project>
+      <Name>ERP.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ERP.ViewModel\ERP.ViewModel.csproj">
       <Project>{7c20c3a6-9544-4515-9cf3-e472a5934c92}</Project>
       <Name>ERP.ViewModel</Name>
