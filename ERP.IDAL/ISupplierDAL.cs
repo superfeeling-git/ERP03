@@ -17,7 +17,7 @@ namespace ERP.IDAL
         /// <param name="PageSize"></param>
         /// <param name="supplierQueryModel"></param>
         /// <returns></returns>
-        PageListModel<T> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel);
+        PageListModel<T> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel, string field, string order);
         /// <summary>
         /// 获取供应商最新编号
         /// </summary>

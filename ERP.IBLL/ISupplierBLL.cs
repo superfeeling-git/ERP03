@@ -10,6 +10,6 @@ namespace ERP.IBLL
     public interface ISupplierBLL<T> : IBaseAction<T>
         where T : class, new()
     {
-        PageListModel<T> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel);
+        PageListModel<T> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel, string field, string order);
     }
 }

@@ -37,8 +37,8 @@ namespace ERP.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Product> Order_Product { get; set; }
         public virtual Storage Storage { get; set; }
+        public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPresencenOrder> ProductPresencenOrder { get; set; }
-        public virtual Supplier Supplier { get; set; }
     }
 }

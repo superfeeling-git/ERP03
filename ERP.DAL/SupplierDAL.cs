@@ -9,6 +9,7 @@ using ERP.Utility;
 using ERP.ViewModel;
 using EntityFramework.Extensions;
 using AutoMapper;
+using System.Linq.Dynamic;
 
 namespace ERP.DAL
 {
@@ -105,7 +106,7 @@ namespace ERP.DAL
             throw new NotImplementedException();
         }
 
-        public PageListModel<SupplierModel> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel)
+        public PageListModel<SupplierModel> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel, string field, string order)
         {
             var query = db.Supplier.Join(db.Dict, a => a.SupplierLevel, b => b.DictCode, (a, b) => new { a,b })
                 .Join(db.Dict,d => d.a.SupplierState  ,b => b.DictCode, (d,b) => new SupplierModel {
@@ -134,7 +135,10 @@ namespace ERP.DAL
 
             pageListModel.TotalCount = query.Count();
 
-            pageListModel.PageList = query.OrderBy(m => m.SupplierID).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+            if(string.IsNullOrWhiteSpace(field))
+                pageListModel.PageList = query.OrderBy(m=>m.AddTime).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+            else
+                pageListModel.PageList = query.OrderBy($"{field} {order}").Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
 
             return pageListModel;
         }

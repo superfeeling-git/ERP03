@@ -169,5 +169,10 @@ namespace ERP.BLL
             productClassDAL.Delete(id);
             return new TResult { ErrorCode = 0, Msg = "删除成功" };
         }
+
+        public void Dispose()
+        {
+            productClassDAL.Dispose();
+        }
     }
 }

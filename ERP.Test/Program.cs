@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ERP.ViewModel;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
-using System.Reflection;
-using System.Data.Entity;
-using ERP.Domain;
 using EntityFramework.Extensions;
-using ERP.Utility;
+using NPOI.HPSF;
+using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
+using NPOI.SS.UserModel;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using ERP.Domain;
 
 namespace ERP.Test
 {
@@ -18,15 +18,127 @@ namespace ERP.Test
     {
         static void Main(string[] args)
         {
+            erp__Entities db = new erp__Entities();
+            db.Admin.Where(m => m.AdminID == 3).Update(m=>new Admin { LastLoginIP = "666" });
+
+            Console.WriteLine(HashPassword("666666"));
+
+            Console.ReadLine();
+
+            //1、创建工作簿
+            HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
+
+            //2、创建工作表
+            ISheet sheet = hSSFWorkbook.CreateSheet("第1个工作表");
+
+            string FilePath = Path.GetFullPath("../../") + "test.xls";
+
+            //文档摘要信息
+            DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
+            dsi.Company = "八维北京校区";
+
+            SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
+            si.Author = "物联网1803A";
+
+            hSSFWorkbook.DocumentSummaryInformation = dsi;
+            hSSFWorkbook.SummaryInformation = si;
+
+            #region MyRegion
+            ////3、创建行、单元格
+            //IRow row = sheet.CreateRow(0);      //行
+
+            //ICell cell = row.CreateCell(0);     //单元格
+
+            ////4、写值
+            //cell.SetCellValue("单元格内容测试");
+
+            ////单元格合并
+            //sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, 6));
+            #endregion
+
+            //dechengEntities db = new dechengEntities();
+
+
+            //准备数据
+            //List<dc_Log> dc_Logs = db.dc_Log.Take(20).ToList();
+
+            //PropertyInfo[] propertyInfos = typeof(dc_Log).GetProperties();
+
+            //sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, propertyInfos.Length - 1));
+
+            IRow headerRow = sheet.CreateRow(0);
+
+            headerRow.Height = 40 * 20;
+
+            ICell headerCell = headerRow.CreateCell(0);
+
+            headerCell.SetCellValue("日志记录");
+
+            ICellStyle hSSFCellStyle = hSSFWorkbook.CreateCellStyle();
+
+            IFont hSSFFont = hSSFWorkbook.CreateFont();
+
+            hSSFFont.Color = HSSFColor.Red.Index;
+            //字号
+            hSSFFont.FontHeightInPoints = 19;
+
+            //水平居中
+            hSSFCellStyle.Alignment = HorizontalAlignment.Center;
+            //垂直居中
+            hSSFCellStyle.VerticalAlignment = VerticalAlignment.Center;
+
+            //设置单元格样式的字体
+            hSSFCellStyle.SetFont(hSSFFont);
+
+            //设置标头的样式
+            headerCell.CellStyle = hSSFCellStyle;
+
+
+            //遍历数据行
+            //for (int i = 1; i < dc_Logs.Count(); i++)
+            //{
+            //    //创建Excel行
+            //    IRow row = sheet.CreateRow(i);
+
+            //    row.Height = 20 * 20;
+
+            //    //遍历所有属必
+            //    for (int p = 0; p < propertyInfos.Length; p++)
+            //    {
+            //        //创建Excel列
+            //        ICell cell = row.CreateCell(p);
+
+            //        sheet.SetColumnWidth(p, 14 * 256);
+
+            //        //获取列的值
+            //        object obj = propertyInfos[p].GetValue(dc_Logs[i]);
+
+            //        //写值
+            //        cell.SetCellValue(obj.ToString());
+            //    }
+            //}
+
+            using (FileStream fs = new FileStream(FilePath, FileMode.Create))
+            {
+                hSSFWorkbook.Write(fs);
+            }
+
+            Console.WriteLine(FilePath);
+
+            Console.ReadLine();
+
+
+
+            #region MyRegion
             //erp__Entities db = new erp__Entities();
 
             //Console.WriteLine(db.Admin.Last().UserName);
 
-            int[] ClassID = new int[] { 1,2,3, 5 };
+            //int[] ClassID = new int[] { 1,2,3, 5 };
 
-            Console.WriteLine(ClassID.Last());
+            //Console.WriteLine(ClassID.Last());
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
 
 
@@ -73,6 +185,7 @@ namespace ERP.Test
             //db.SaveChanges();
 
             //Console.WriteLine($"保存后：{supplier.SupplierID}");
+            #endregion
 
 
             #region MyRegion
@@ -147,6 +260,25 @@ namespace ERP.Test
 
             Console.Read();
 
+        }
+
+        public static string HashPassword(string password)
+        {
+            byte[] salt;
+            byte[] buffer2;
+            if (password == null)
+            {
+                throw new ArgumentNullException("password");
+            }
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
+            {
+                salt = bytes.Salt;
+                buffer2 = bytes.GetBytes(0x20);
+            }
+            byte[] dst = new byte[0x31];
+            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+            return Convert.ToBase64String(dst);
         }
 
         /// <summary>

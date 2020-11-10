@@ -37,6 +37,11 @@ namespace ERP.BLL
             throw new NotImplementedException();
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<SupplierModel> GetAll()
         {
             throw new NotImplementedException();
@@ -54,9 +59,9 @@ namespace ERP.BLL
         /// <param name="PageSize"></param>
         /// <param name="supplierQueryModel"></param>
         /// <returns></returns>
-        public PageListModel<SupplierModel> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel)
+        public PageListModel<SupplierModel> PageList(int PageIndex, int PageSize, SupplierQueryModel supplierQueryModel, string field, string order)
         {
-            return supplierDAL.PageList(PageIndex, PageSize, supplierQueryModel);
+            return supplierDAL.PageList(PageIndex, PageSize, supplierQueryModel, field, order);
         }
 
         public int Update(SupplierModel Model)

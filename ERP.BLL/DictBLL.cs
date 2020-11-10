@@ -29,6 +29,11 @@ namespace ERP.BLL
             throw new NotImplementedException();
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<DictModel> GetAll()
         {
             return dictDAL.GetAll();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -66,8 +67,15 @@ namespace ERP.UI.Controllers
                 Directory.CreateDirectory(Server.MapPath(SavePath));
             }
 
+            //用GUID初始化Random
+            Random random = new Random(Guid.NewGuid().GetHashCode());
+
+            String newFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + extName;
+
             //上传文件的完整路径
-            string SaveFileName = $"{SavePath}/{DateTime.Now.ToString("yyyyMMddHHmmss_fff")}{extName}";
+            string SaveFileName = $"{SavePath}/{newFileName}";
+
+
 
             //保存文件的路径
             string SaveFilePath = Server.MapPath(SaveFileName);

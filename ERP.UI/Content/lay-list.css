@@ -1,0 +1,29 @@
+﻿.layui-form-label {
+    width: auto;
+    padding: 8px 3px;
+}
+
+.layui-form-item .layui-input-inline {
+    width: 180px;
+}
+
+.layui-card {
+    padding-top: 15px;
+}
+
+td.chk {
+    text-align: center;
+}
+
+    td.chk div.layui-form-checkbox[lay-skin="primary"] {
+        padding: 0;
+    }
+
+.layui-table td, .layui-table th {
+    padding: 6px 15px;
+}
+
+div#page {
+    width: 100%;
+    text-align: center;
+}

@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link href="~/Content/lay-list.css" rel="stylesheet" />
 </head>
 <body>
     @{ IEnumerable<DictModel> dictList = ViewBag.Dict as IEnumerable<DictModel>; }
@@ -54,9 +55,9 @@
                                 <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">搜索</button>
                             </div>
                         </form>
-                            <table class="layui-hide" id="test-table-reload" lay-filter="user"></table>
+                        <table class="layui-hide" id="test-table-reload" lay-filter="user"></table>
 
-                            <blockquote class="layui-elem-quote">此处由于是静态模拟数据，所以搜索后重载的结果没变，这并非是 BUG。实际使用时改成真实接口并根据搜索的字段筛选出对应的数据即可。</blockquote>
+                        <blockquote class="layui-elem-quote">此处由于是静态模拟数据，所以搜索后重载的结果没变，这并非是 BUG。实际使用时改成真实接口并根据搜索的字段筛选出对应的数据即可。</blockquote>
 
                     </div>
                 </div>
@@ -64,7 +65,14 @@
         </div>
     </div>
 
-
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+            <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+            <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+        </div>
+    </script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="/layuiadmin/layui/layui.js"></script>
     <script>
           layui.config({
@@ -89,8 +97,50 @@
                                   , { field:'SupplierState', title: '供应商状态', sort: true}
                                   , {field:'score', title: '操作', sort: true, width:80}
                               ]]
-                              ,page: true
-                            });
+                  , page: true
+                  , initSort: {
+                      field: 'SupplierName' //排序字段，对应 cols 设定的各字段名
+                      , type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                  }
+                  , toolbar: '#toolbarDemo'
+                  , autoSort: false
+                  , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                        title: '提示'
+                      , layEvent: 'LAYTABLE_TIPS'
+                      , icon: 'layui-icon-tips'
+                  }]
+              });
+
+              //监听事件
+              table.on('toolbar(user)', function (obj) {
+                  var checkStatus = table.checkStatus(obj.config.id);
+                  //动态创建表单加到fbody中，最后删除表单
+                    //var queryForm = $("#queryCourseForm");
+                    @*var exportForm = $("<form action='@Url.Action("OutExcel")' method='post'></form>")
+                    //exportForm.html(queryForm.html());
+                    $(document.body).append(exportForm);
+                    exportForm.submit();
+                    exportForm.remove();*@
+              });
+
+              //监听排序事件 
+              table.on('sort(user)', function (obj) { //注：sort 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+                  console.log(obj.field); //当前排序的字段名
+                  console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+                  console.log(this); //当前排序的 th 对象
+
+                  //尽管我们的 table 自带排序功能，但并没有请求服务端。
+                  //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
+                  table.reload('test-table-reload', {
+                      initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。
+                      , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                          field: obj.field //排序字段
+                          , order: obj.type //排序方式
+                      }
+                  });
+
+                  layer.msg('服务端排序。order by ' + obj.field + ' ' + obj.type);
+              });
 
               /* 监听提交 */
               form.on('submit(component-form-demo1)', function (data) {

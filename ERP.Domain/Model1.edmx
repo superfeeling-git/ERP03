@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="erp__Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="erp__Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -563,99 +563,40 @@
             <End Role="SysMenu_Role" EntitySet="SysMenu_Role" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="erp__Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="erp__Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Order_Product" EntityType="erp__Model.Order_Product" />
-          <EntitySet Name="PresencenOrder_Product" EntityType="erp__Model.PresencenOrder_Product" />
-          <EntitySet Name="Product" EntityType="erp__Model.Product" />
-          <EntitySet Name="Product_ProductProperty" EntityType="erp__Model.Product_ProductProperty" />
-          <EntitySet Name="ProductClass" EntityType="erp__Model.ProductClass" />
-          <EntitySet Name="ProductClass_Supplier" EntityType="erp__Model.ProductClass_Supplier" />
-          <EntitySet Name="ProductOrder" EntityType="erp__Model.ProductOrder" />
-          <EntitySet Name="ProductPresencenOrder" EntityType="erp__Model.ProductPresencenOrder" />
-          <EntitySet Name="ProductProperty" EntityType="erp__Model.ProductProperty" />
-          <EntitySet Name="Storage" EntityType="erp__Model.Storage" />
-          <EntitySet Name="StorageLocation" EntityType="erp__Model.StorageLocation" />
-          <EntitySet Name="StorageRegion" EntityType="erp__Model.StorageRegion" />
-          <EntitySet Name="StorageType" EntityType="erp__Model.StorageType" />
-          <AssociationSet Name="FK_Order_Product_REFERENCE_Product" Association="erp__Model.FK_Order_Product_REFERENCE_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Order_Product" EntitySet="Order_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Product_REFERENCE_ProductOrder" Association="erp__Model.FK_Order_Product_REFERENCE_ProductOrder">
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-            <End Role="Order_Product" EntitySet="Order_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PresencenOrder_Product_REFERENCE_Product" Association="erp__Model.FK_PresencenOrder_Product_REFERENCE_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="PresencenOrder_Product" EntitySet="PresencenOrder_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" Association="erp__Model.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder">
-            <End Role="ProductPresencenOrder" EntitySet="ProductPresencenOrder" />
-            <End Role="PresencenOrder_Product" EntitySet="PresencenOrder_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductProperty_REFERENCE_Product" Association="erp__Model.FK_Product_ProductProperty_REFERENCE_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Product_ProductProperty" EntitySet="Product_ProductProperty" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductProperty_REFERENCE_ProductProperty" Association="erp__Model.FK_Product_ProductProperty_REFERENCE_ProductProperty">
-            <End Role="ProductProperty" EntitySet="ProductProperty" />
-            <End Role="Product_ProductProperty" EntitySet="Product_ProductProperty" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductClass_Supplier_REFERENCE_ProductClass" Association="erp__Model.FK_ProductClass_Supplier_REFERENCE_ProductClass">
-            <End Role="ProductClass" EntitySet="ProductClass" />
-            <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrder_REFERENCE_Storage" Association="erp__Model.FK_ProductOrder_REFERENCE_Storage">
-            <End Role="Storage" EntitySet="Storage" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductPresencenOrder_REFERENCE_ProductOrder" Association="erp__Model.FK_ProductPresencenOrder_REFERENCE_ProductOrder">
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-            <End Role="ProductPresencenOrder" EntitySet="ProductPresencenOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Storage_REFERENCE_StorageType" Association="erp__Model.FK_Storage_REFERENCE_StorageType">
-            <End Role="StorageType" EntitySet="StorageType" />
-            <End Role="Storage" EntitySet="Storage" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StorageRegion_REFERENCE_Storage" Association="erp__Model.FK_StorageRegion_REFERENCE_Storage">
-            <End Role="Storage" EntitySet="Storage" />
-            <End Role="StorageRegion" EntitySet="StorageRegion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StorageLocation_REFERENCE_StorageRegion" Association="erp__Model.FK_StorageLocation_REFERENCE_StorageRegion">
-            <End Role="StorageRegion" EntitySet="StorageRegion" />
-            <End Role="StorageLocation" EntitySet="StorageLocation" />
-          </AssociationSet>
-          <EntitySet Name="Dict" EntityType="erp__Model.Dict" />
-          <EntitySet Name="DictType" EntityType="erp__Model.DictType" />
-          <AssociationSet Name="FK_Dict_REFERENCE_DictType" Association="erp__Model.FK_Dict_REFERENCE_DictType">
-            <End Role="DictType" EntitySet="DictType" />
-            <End Role="Dict" EntitySet="Dict" />
-          </AssociationSet>
-          <EntitySet Name="Admin" EntityType="erp__Model.Admin" />
-          <EntitySet Name="Role" EntityType="erp__Model.Role" />
-          <EntitySet Name="SysMenu" EntityType="erp__Model.SysMenu" />
-          <AssociationSet Name="Role_User" Association="erp__Model.Role_User">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Role" EntitySet="Role" />
-          </AssociationSet>
-          <AssociationSet Name="SysMenu_Role" Association="erp__Model.SysMenu_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="SysMenu" EntitySet="SysMenu" />
-          </AssociationSet>
-          <EntitySet Name="Supplier" EntityType="erp__Model.Supplier" />
-          <AssociationSet Name="FK_ProductClass_Supplier_REFERENCE_Supplier" Association="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrder_REFERENCE_Supplier" Association="erp__Model.FK_ProductOrder_REFERENCE_Supplier">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="ProductOrder" EntitySet="ProductOrder" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.Role_User" FromRole="Admin" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Dict">
+          <Key>
+            <PropertyRef Name="DictCode" />
+          </Key>
+          <Property Name="DictCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DictOrder" Type="Int32" />
+          <NavigationProperty Name="DictType" Relationship="Self.FK_Dict_REFERENCE_DictType" FromRole="Dict" ToRole="DictType" />
+        </EntityType>
+        <EntityType Name="DictType">
+          <Key>
+            <PropertyRef Name="TypeCode" />
+          </Key>
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dict" Relationship="Self.FK_Dict_REFERENCE_DictType" FromRole="DictType" ToRole="Dict" />
+        </EntityType>
         <EntityType Name="Order_Product">
           <Key>
             <PropertyRef Name="ID" />
@@ -665,8 +606,8 @@
           <Property Name="ProductID" Type="Int32" />
           <Property Name="BuyCount" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Product" Relationship="erp__Model.FK_Order_Product_REFERENCE_Product" FromRole="Order_Product" ToRole="Product" />
-          <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_Order_Product_REFERENCE_ProductOrder" FromRole="Order_Product" ToRole="ProductOrder" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Order_Product_REFERENCE_Product" FromRole="Order_Product" ToRole="Product" />
+          <NavigationProperty Name="ProductOrder" Relationship="Self.FK_Order_Product_REFERENCE_ProductOrder" FromRole="Order_Product" ToRole="ProductOrder" />
         </EntityType>
         <EntityType Name="PresencenOrder_Product">
           <Key>
@@ -676,8 +617,8 @@
           <Property Name="OrderID" Type="Int32" />
           <Property Name="ProductID" Type="Int32" />
           <Property Name="BuyCount" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="erp__Model.FK_PresencenOrder_Product_REFERENCE_Product" FromRole="PresencenOrder_Product" ToRole="Product" />
-          <NavigationProperty Name="ProductPresencenOrder" Relationship="erp__Model.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" FromRole="PresencenOrder_Product" ToRole="ProductPresencenOrder" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_PresencenOrder_Product_REFERENCE_Product" FromRole="PresencenOrder_Product" ToRole="Product" />
+          <NavigationProperty Name="ProductPresencenOrder" Relationship="Self.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" FromRole="PresencenOrder_Product" ToRole="ProductPresencenOrder" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -694,9 +635,9 @@
           <Property Name="BrandID" Type="Int32" />
           <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Order_Product" Relationship="erp__Model.FK_Order_Product_REFERENCE_Product" FromRole="Product" ToRole="Order_Product" />
-          <NavigationProperty Name="PresencenOrder_Product" Relationship="erp__Model.FK_PresencenOrder_Product_REFERENCE_Product" FromRole="Product" ToRole="PresencenOrder_Product" />
-          <NavigationProperty Name="Product_ProductProperty" Relationship="erp__Model.FK_Product_ProductProperty_REFERENCE_Product" FromRole="Product" ToRole="Product_ProductProperty" />
+          <NavigationProperty Name="Order_Product" Relationship="Self.FK_Order_Product_REFERENCE_Product" FromRole="Product" ToRole="Order_Product" />
+          <NavigationProperty Name="PresencenOrder_Product" Relationship="Self.FK_PresencenOrder_Product_REFERENCE_Product" FromRole="Product" ToRole="PresencenOrder_Product" />
+          <NavigationProperty Name="Product_ProductProperty" Relationship="Self.FK_Product_ProductProperty_REFERENCE_Product" FromRole="Product" ToRole="Product_ProductProperty" />
         </EntityType>
         <EntityType Name="Product_ProductProperty">
           <Key>
@@ -706,8 +647,8 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="ProductPropertyID" Type="Int32" Nullable="false" />
           <Property Name="ProductPropertyVal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="erp__Model.FK_Product_ProductProperty_REFERENCE_Product" FromRole="Product_ProductProperty" ToRole="Product" />
-          <NavigationProperty Name="ProductProperty" Relationship="erp__Model.FK_Product_ProductProperty_REFERENCE_ProductProperty" FromRole="Product_ProductProperty" ToRole="ProductProperty" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductProperty_REFERENCE_Product" FromRole="Product_ProductProperty" ToRole="Product" />
+          <NavigationProperty Name="ProductProperty" Relationship="Self.FK_Product_ProductProperty_REFERENCE_ProductProperty" FromRole="Product_ProductProperty" ToRole="ProductProperty" />
         </EntityType>
         <EntityType Name="ProductClass">
           <Key>
@@ -719,7 +660,7 @@
           <Property Name="Depth" Type="Int32" />
           <Property Name="ParentID" Type="Int32" />
           <Property Name="ParentPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductClass_Supplier" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_ProductClass" FromRole="ProductClass" ToRole="ProductClass_Supplier" />
+          <NavigationProperty Name="ProductClass_Supplier" Relationship="Self.FK_ProductClass_Supplier_REFERENCE_ProductClass" FromRole="ProductClass" ToRole="ProductClass_Supplier" />
         </EntityType>
         <EntityType Name="ProductClass_Supplier">
           <Key>
@@ -728,8 +669,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="ClassID" Type="Int32" />
-          <NavigationProperty Name="ProductClass" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_ProductClass" FromRole="ProductClass_Supplier" ToRole="ProductClass" />
-          <NavigationProperty Name="Supplier" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="ProductClass_Supplier" ToRole="Supplier" />
+          <NavigationProperty Name="ProductClass" Relationship="Self.FK_ProductClass_Supplier_REFERENCE_ProductClass" FromRole="ProductClass_Supplier" ToRole="ProductClass" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="ProductClass_Supplier" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="ProductOrder">
           <Key>
@@ -747,10 +688,10 @@
           <Property Name="TotalMoney" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="OrderState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AuditUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order_Product" Relationship="erp__Model.FK_Order_Product_REFERENCE_ProductOrder" FromRole="ProductOrder" ToRole="Order_Product" />
-          <NavigationProperty Name="Storage" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Storage" FromRole="ProductOrder" ToRole="Storage" />
-          <NavigationProperty Name="ProductPresencenOrder" Relationship="erp__Model.FK_ProductPresencenOrder_REFERENCE_ProductOrder" FromRole="ProductOrder" ToRole="ProductPresencenOrder" />
-          <NavigationProperty Name="Supplier" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="ProductOrder" ToRole="Supplier" />
+          <NavigationProperty Name="Order_Product" Relationship="Self.FK_Order_Product_REFERENCE_ProductOrder" FromRole="ProductOrder" ToRole="Order_Product" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_ProductOrder_REFERENCE_Storage" FromRole="ProductOrder" ToRole="Storage" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_ProductOrder_REFERENCE_Supplier" FromRole="ProductOrder" ToRole="Supplier" />
+          <NavigationProperty Name="ProductPresencenOrder" Relationship="Self.FK_ProductPresencenOrder_REFERENCE_ProductOrder" FromRole="ProductOrder" ToRole="ProductPresencenOrder" />
         </EntityType>
         <EntityType Name="ProductPresencenOrder">
           <Key>
@@ -758,9 +699,9 @@
           </Key>
           <Property Name="PresencenOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="PresencenOrderCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PresencenOrder_Product" Relationship="erp__Model.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" FromRole="ProductPresencenOrder" ToRole="PresencenOrder_Product" />
-          <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_ProductPresencenOrder_REFERENCE_ProductOrder" FromRole="ProductPresencenOrder" ToRole="ProductOrder" />
+          <Property Name="PresencenOrderCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PresencenOrder_Product" Relationship="Self.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" FromRole="ProductPresencenOrder" ToRole="PresencenOrder_Product" />
+          <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductPresencenOrder_REFERENCE_ProductOrder" FromRole="ProductPresencenOrder" ToRole="ProductOrder" />
         </EntityType>
         <EntityType Name="ProductProperty">
           <Key>
@@ -771,7 +712,17 @@
           <Property Name="ProductPropertyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductPropertyIntro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductPropertyOrder" Type="Int32" />
-          <NavigationProperty Name="Product_ProductProperty" Relationship="erp__Model.FK_Product_ProductProperty_REFERENCE_ProductProperty" FromRole="ProductProperty" ToRole="Product_ProductProperty" />
+          <NavigationProperty Name="Product_ProductProperty" Relationship="Self.FK_Product_ProductProperty_REFERENCE_ProductProperty" FromRole="ProductProperty" ToRole="Product_ProductProperty" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Admin" Relationship="Self.Role_User" FromRole="Role" ToRole="Admin" />
+          <NavigationProperty Name="SysMenu" Relationship="Self.SysMenu_Role" FromRole="Role" ToRole="SysMenu" />
         </EntityType>
         <EntityType Name="Storage">
           <Key>
@@ -789,9 +740,9 @@
           <Property Name="StorageLocaltion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Storage" FromRole="Storage" ToRole="ProductOrder" />
-          <NavigationProperty Name="StorageType" Relationship="erp__Model.FK_Storage_REFERENCE_StorageType" FromRole="Storage" ToRole="StorageType" />
-          <NavigationProperty Name="StorageRegion" Relationship="erp__Model.FK_StorageRegion_REFERENCE_Storage" FromRole="Storage" ToRole="StorageRegion" />
+          <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_REFERENCE_Storage" FromRole="Storage" ToRole="ProductOrder" />
+          <NavigationProperty Name="StorageType" Relationship="Self.FK_Storage_REFERENCE_StorageType" FromRole="Storage" ToRole="StorageType" />
+          <NavigationProperty Name="StorageRegion" Relationship="Self.FK_StorageRegion_REFERENCE_Storage" FromRole="Storage" ToRole="StorageRegion" />
         </EntityType>
         <EntityType Name="StorageLocation">
           <Key>
@@ -805,7 +756,7 @@
           <Property Name="StorageState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="StorageRegion" Relationship="erp__Model.FK_StorageLocation_REFERENCE_StorageRegion" FromRole="StorageLocation" ToRole="StorageRegion" />
+          <NavigationProperty Name="StorageRegion" Relationship="Self.FK_StorageLocation_REFERENCE_StorageRegion" FromRole="StorageLocation" ToRole="StorageRegion" />
         </EntityType>
         <EntityType Name="StorageRegion">
           <Key>
@@ -818,8 +769,8 @@
           <Property Name="StorageState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Storage" Relationship="erp__Model.FK_StorageRegion_REFERENCE_Storage" FromRole="StorageRegion" ToRole="Storage" />
-          <NavigationProperty Name="StorageLocation" Relationship="erp__Model.FK_StorageLocation_REFERENCE_StorageRegion" FromRole="StorageRegion" ToRole="StorageLocation" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_StorageRegion_REFERENCE_Storage" FromRole="StorageRegion" ToRole="Storage" />
+          <NavigationProperty Name="StorageLocation" Relationship="Self.FK_StorageLocation_REFERENCE_StorageRegion" FromRole="StorageRegion" ToRole="StorageLocation" />
         </EntityType>
         <EntityType Name="StorageType">
           <Key>
@@ -830,223 +781,8 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="LastEditTime" Type="DateTime" Precision="3" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Storage" Relationship="erp__Model.FK_Storage_REFERENCE_StorageType" FromRole="StorageType" ToRole="Storage" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK_Storage_REFERENCE_StorageType" FromRole="StorageType" ToRole="Storage" />
         </EntityType>
-        <Association Name="FK_Order_Product_REFERENCE_Product">
-          <End Type="erp__Model.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="erp__Model.Order_Product" Role="Order_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="Order_Product">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Product_REFERENCE_ProductOrder">
-          <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="0..1" />
-          <End Type="erp__Model.Order_Product" Role="Order_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductOrder">
-              <PropertyRef Name="OrderID" />
-            </Principal>
-            <Dependent Role="Order_Product">
-              <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PresencenOrder_Product_REFERENCE_Product">
-          <End Type="erp__Model.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="erp__Model.PresencenOrder_Product" Role="PresencenOrder_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="PresencenOrder_Product">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder">
-          <End Type="erp__Model.ProductPresencenOrder" Role="ProductPresencenOrder" Multiplicity="0..1" />
-          <End Type="erp__Model.PresencenOrder_Product" Role="PresencenOrder_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductPresencenOrder">
-              <PropertyRef Name="PresencenOrderID" />
-            </Principal>
-            <Dependent Role="PresencenOrder_Product">
-              <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_ProductProperty_REFERENCE_Product">
-          <End Type="erp__Model.Product" Role="Product" Multiplicity="1" />
-          <End Type="erp__Model.Product_ProductProperty" Role="Product_ProductProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="Product_ProductProperty">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_ProductProperty_REFERENCE_ProductProperty">
-          <End Type="erp__Model.ProductProperty" Role="ProductProperty" Multiplicity="1" />
-          <End Type="erp__Model.Product_ProductProperty" Role="Product_ProductProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductProperty">
-              <PropertyRef Name="ProductPropertyID" />
-            </Principal>
-            <Dependent Role="Product_ProductProperty">
-              <PropertyRef Name="ProductPropertyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductClass_Supplier_REFERENCE_ProductClass">
-          <End Type="erp__Model.ProductClass" Role="ProductClass" Multiplicity="0..1" />
-          <End Type="erp__Model.ProductClass_Supplier" Role="ProductClass_Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductClass">
-              <PropertyRef Name="ClassID" />
-            </Principal>
-            <Dependent Role="ProductClass_Supplier">
-              <PropertyRef Name="ClassID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductOrder_REFERENCE_Storage">
-          <End Type="erp__Model.Storage" Role="Storage" Multiplicity="0..1" />
-          <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Storage">
-              <PropertyRef Name="StorageID" />
-            </Principal>
-            <Dependent Role="ProductOrder">
-              <PropertyRef Name="StorageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductPresencenOrder_REFERENCE_ProductOrder">
-          <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="1" />
-          <End Type="erp__Model.ProductPresencenOrder" Role="ProductPresencenOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductOrder">
-              <PropertyRef Name="OrderID" />
-            </Principal>
-            <Dependent Role="ProductPresencenOrder">
-              <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Storage_REFERENCE_StorageType">
-          <End Type="erp__Model.StorageType" Role="StorageType" Multiplicity="0..1" />
-          <End Type="erp__Model.Storage" Role="Storage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StorageType">
-              <PropertyRef Name="StorageTypeID" />
-            </Principal>
-            <Dependent Role="Storage">
-              <PropertyRef Name="StorageTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StorageRegion_REFERENCE_Storage">
-          <End Type="erp__Model.Storage" Role="Storage" Multiplicity="0..1" />
-          <End Type="erp__Model.StorageRegion" Role="StorageRegion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Storage">
-              <PropertyRef Name="StorageID" />
-            </Principal>
-            <Dependent Role="StorageRegion">
-              <PropertyRef Name="StorageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StorageLocation_REFERENCE_StorageRegion">
-          <End Type="erp__Model.StorageRegion" Role="StorageRegion" Multiplicity="0..1" />
-          <End Type="erp__Model.StorageLocation" Role="StorageLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StorageRegion">
-              <PropertyRef Name="StorageRegionID" />
-            </Principal>
-            <Dependent Role="StorageLocation">
-              <PropertyRef Name="StorageRegionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Dict">
-          <Key>
-            <PropertyRef Name="DictCode" />
-          </Key>
-          <Property Name="DictCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DictOrder" Type="Int32" />
-          <NavigationProperty Name="DictType" Relationship="erp__Model.FK_Dict_REFERENCE_DictType" FromRole="Dict" ToRole="DictType" />
-        </EntityType>
-        <EntityType Name="DictType">
-          <Key>
-            <PropertyRef Name="TypeCode" />
-          </Key>
-          <Property Name="TypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Dict" Relationship="erp__Model.FK_Dict_REFERENCE_DictType" FromRole="DictType" ToRole="Dict" />
-        </EntityType>
-        <Association Name="FK_Dict_REFERENCE_DictType">
-          <End Type="erp__Model.DictType" Role="DictType" Multiplicity="0..1" />
-          <End Type="erp__Model.Dict" Role="Dict" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DictType">
-              <PropertyRef Name="TypeCode" />
-            </Principal>
-            <Dependent Role="Dict">
-              <PropertyRef Name="TypeCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="AdminID" />
-          </Key>
-          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastLoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Role" Relationship="erp__Model.Role_User" FromRole="Admin" ToRole="Role" />
-        </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Admin" Relationship="erp__Model.Role_User" FromRole="Role" ToRole="Admin" />
-          <NavigationProperty Name="SysMenu" Relationship="erp__Model.SysMenu_Role" FromRole="Role" ToRole="SysMenu" />
-        </EntityType>
-        <EntityType Name="SysMenu">
-          <Key>
-            <PropertyRef Name="ClassID" />
-          </Key>
-          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ClassIntro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Depth" Type="Int32" />
-          <Property Name="ParentID" Type="Int32" />
-          <Property Name="ParentPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="erp__Model.SysMenu_Role" FromRole="SysMenu" ToRole="Role" />
-        </EntityType>
-        <Association Name="Role_User">
-          <End Type="erp__Model.Admin" Role="Admin" Multiplicity="*" />
-          <End Type="erp__Model.Role" Role="Role" Multiplicity="*" />
-        </Association>
-        <Association Name="SysMenu_Role">
-          <End Type="erp__Model.Role" Role="Role" Multiplicity="*" />
-          <End Type="erp__Model.SysMenu" Role="SysMenu" Multiplicity="*" />
-        </Association>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierID" />
@@ -1066,12 +802,120 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Contract" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ProductClass_Supplier" Relationship="erp__Model.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductClass_Supplier" />
-          <NavigationProperty Name="ProductOrder" Relationship="erp__Model.FK_ProductOrder_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductOrder" />
+          <NavigationProperty Name="ProductClass_Supplier" Relationship="Self.FK_ProductClass_Supplier_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductClass_Supplier" />
+          <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_REFERENCE_Supplier" FromRole="Supplier" ToRole="ProductOrder" />
         </EntityType>
+        <EntityType Name="SysMenu">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClassIntro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Depth" Type="Int32" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="ParentPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="Self.SysMenu_Role" FromRole="SysMenu" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Dict_REFERENCE_DictType">
+          <End Role="DictType" Type="Self.DictType" Multiplicity="0..1" />
+          <End Role="Dict" Type="Self.Dict" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictType">
+              <PropertyRef Name="TypeCode" />
+            </Principal>
+            <Dependent Role="Dict">
+              <PropertyRef Name="TypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Product_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Order_Product" Type="Self.Order_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Order_Product">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Product_REFERENCE_ProductOrder">
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="0..1" />
+          <End Role="Order_Product" Type="Self.Order_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOrder">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_Product">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresencenOrder_Product_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PresencenOrder_Product" Type="Self.PresencenOrder_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PresencenOrder_Product">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder">
+          <End Role="ProductPresencenOrder" Type="Self.ProductPresencenOrder" Multiplicity="0..1" />
+          <End Role="PresencenOrder_Product" Type="Self.PresencenOrder_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPresencenOrder">
+              <PropertyRef Name="PresencenOrderID" />
+            </Principal>
+            <Dependent Role="PresencenOrder_Product">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductProperty_REFERENCE_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product_ProductProperty" Type="Self.Product_ProductProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_ProductProperty">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductProperty_REFERENCE_ProductProperty">
+          <End Role="ProductProperty" Type="Self.ProductProperty" Multiplicity="1" />
+          <End Role="Product_ProductProperty" Type="Self.Product_ProductProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductProperty">
+              <PropertyRef Name="ProductPropertyID" />
+            </Principal>
+            <Dependent Role="Product_ProductProperty">
+              <PropertyRef Name="ProductPropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductClass_Supplier_REFERENCE_ProductClass">
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="0..1" />
+          <End Role="ProductClass_Supplier" Type="Self.ProductClass_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="ProductClass_Supplier">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductClass_Supplier_REFERENCE_Supplier">
-          <End Type="erp__Model.Supplier" Role="Supplier" Multiplicity="0..1" />
-          <End Type="erp__Model.ProductClass_Supplier" Role="ProductClass_Supplier" Multiplicity="*" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="ProductClass_Supplier" Type="Self.ProductClass_Supplier" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
               <PropertyRef Name="SupplierID" />
@@ -1081,9 +925,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductOrder_REFERENCE_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductOrder_REFERENCE_Supplier">
-          <End Type="erp__Model.Supplier" Role="Supplier" Multiplicity="0..1" />
-          <End Type="erp__Model.ProductOrder" Role="ProductOrder" Multiplicity="*" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
               <PropertyRef Name="SupplierID" />
@@ -1093,261 +949,406 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductPresencenOrder_REFERENCE_ProductOrder">
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="1" />
+          <End Role="ProductPresencenOrder" Type="Self.ProductPresencenOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductOrder">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="ProductPresencenOrder">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storage_REFERENCE_StorageType">
+          <End Role="StorageType" Type="Self.StorageType" Multiplicity="0..1" />
+          <End Role="Storage" Type="Self.Storage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageType">
+              <PropertyRef Name="StorageTypeID" />
+            </Principal>
+            <Dependent Role="Storage">
+              <PropertyRef Name="StorageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageRegion_REFERENCE_Storage">
+          <End Role="Storage" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="StorageRegion" Type="Self.StorageRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storage">
+              <PropertyRef Name="StorageID" />
+            </Principal>
+            <Dependent Role="StorageRegion">
+              <PropertyRef Name="StorageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageLocation_REFERENCE_StorageRegion">
+          <End Role="StorageRegion" Type="Self.StorageRegion" Multiplicity="0..1" />
+          <End Role="StorageLocation" Type="Self.StorageLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StorageRegion">
+              <PropertyRef Name="StorageRegionID" />
+            </Principal>
+            <Dependent Role="StorageLocation">
+              <PropertyRef Name="StorageRegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_User">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+        </Association>
+        <Association Name="SysMenu_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <End Role="SysMenu" Type="Self.SysMenu" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="erp__Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Dict" EntityType="Self.Dict" />
+          <EntitySet Name="DictType" EntityType="Self.DictType" />
+          <EntitySet Name="Order_Product" EntityType="Self.Order_Product" />
+          <EntitySet Name="PresencenOrder_Product" EntityType="Self.PresencenOrder_Product" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Product_ProductProperty" EntityType="Self.Product_ProductProperty" />
+          <EntitySet Name="ProductClass" EntityType="Self.ProductClass" />
+          <EntitySet Name="ProductClass_Supplier" EntityType="Self.ProductClass_Supplier" />
+          <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" />
+          <EntitySet Name="ProductPresencenOrder" EntityType="Self.ProductPresencenOrder" />
+          <EntitySet Name="ProductProperty" EntityType="Self.ProductProperty" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Storage" EntityType="Self.Storage" />
+          <EntitySet Name="StorageLocation" EntityType="Self.StorageLocation" />
+          <EntitySet Name="StorageRegion" EntityType="Self.StorageRegion" />
+          <EntitySet Name="StorageType" EntityType="Self.StorageType" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="SysMenu" EntityType="Self.SysMenu" />
+          <AssociationSet Name="FK_Dict_REFERENCE_DictType" Association="Self.FK_Dict_REFERENCE_DictType">
+            <End Role="DictType" EntitySet="DictType" />
+            <End Role="Dict" EntitySet="Dict" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Product_REFERENCE_Product" Association="Self.FK_Order_Product_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Order_Product" EntitySet="Order_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Product_REFERENCE_ProductOrder" Association="Self.FK_Order_Product_REFERENCE_ProductOrder">
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+            <End Role="Order_Product" EntitySet="Order_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresencenOrder_Product_REFERENCE_Product" Association="Self.FK_PresencenOrder_Product_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PresencenOrder_Product" EntitySet="PresencenOrder_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder" Association="Self.FK_PresencenOrder_Product_REFERENCE_ProductPresencenOrder">
+            <End Role="ProductPresencenOrder" EntitySet="ProductPresencenOrder" />
+            <End Role="PresencenOrder_Product" EntitySet="PresencenOrder_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductProperty_REFERENCE_Product" Association="Self.FK_Product_ProductProperty_REFERENCE_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_ProductProperty" EntitySet="Product_ProductProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductProperty_REFERENCE_ProductProperty" Association="Self.FK_Product_ProductProperty_REFERENCE_ProductProperty">
+            <End Role="ProductProperty" EntitySet="ProductProperty" />
+            <End Role="Product_ProductProperty" EntitySet="Product_ProductProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductClass_Supplier_REFERENCE_ProductClass" Association="Self.FK_ProductClass_Supplier_REFERENCE_ProductClass">
+            <End Role="ProductClass" EntitySet="ProductClass" />
+            <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductClass_Supplier_REFERENCE_Supplier" Association="Self.FK_ProductClass_Supplier_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="ProductClass_Supplier" EntitySet="ProductClass_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_REFERENCE_Storage" Association="Self.FK_ProductOrder_REFERENCE_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOrder_REFERENCE_Supplier" Association="Self.FK_ProductOrder_REFERENCE_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPresencenOrder_REFERENCE_ProductOrder" Association="Self.FK_ProductPresencenOrder_REFERENCE_ProductOrder">
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+            <End Role="ProductPresencenOrder" EntitySet="ProductPresencenOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storage_REFERENCE_StorageType" Association="Self.FK_Storage_REFERENCE_StorageType">
+            <End Role="StorageType" EntitySet="StorageType" />
+            <End Role="Storage" EntitySet="Storage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageRegion_REFERENCE_Storage" Association="Self.FK_StorageRegion_REFERENCE_Storage">
+            <End Role="Storage" EntitySet="Storage" />
+            <End Role="StorageRegion" EntitySet="StorageRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageLocation_REFERENCE_StorageRegion" Association="Self.FK_StorageLocation_REFERENCE_StorageRegion">
+            <End Role="StorageRegion" EntitySet="StorageRegion" />
+            <End Role="StorageLocation" EntitySet="StorageLocation" />
+          </AssociationSet>
+          <AssociationSet Name="Role_User" Association="Self.Role_User">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="SysMenu_Role" Association="Self.SysMenu_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="SysMenu" EntitySet="SysMenu" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="erp__ModelStoreContainer" CdmEntityContainer="erp__Entities">
-          <EntitySetMapping Name="Order_Product">
-            <EntityTypeMapping TypeName="erp__Model.Order_Product">
-              <MappingFragment StoreEntitySet="Order_Product">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PresencenOrder_Product">
-            <EntityTypeMapping TypeName="erp__Model.PresencenOrder_Product">
-              <MappingFragment StoreEntitySet="PresencenOrder_Product">
-                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="erp__Model.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="Detail" ColumnName="Detail" />
-                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-                <ScalarProperty Name="SPEC" ColumnName="SPEC" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
-                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
-                <ScalarProperty Name="ProductBarCode" ColumnName="ProductBarCode" />
-                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product_ProductProperty">
-            <EntityTypeMapping TypeName="erp__Model.Product_ProductProperty">
-              <MappingFragment StoreEntitySet="Product_ProductProperty">
-                <ScalarProperty Name="ProductPropertyVal" ColumnName="ProductPropertyVal" />
-                <ScalarProperty Name="ProductPropertyID" ColumnName="ProductPropertyID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductClass">
-            <EntityTypeMapping TypeName="erp__Model.ProductClass">
-              <MappingFragment StoreEntitySet="ProductClass">
-                <ScalarProperty Name="ParentPath" ColumnName="ParentPath" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Depth" ColumnName="Depth" />
-                <ScalarProperty Name="ClassIntro" ColumnName="ClassIntro" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductClass_Supplier">
-            <EntityTypeMapping TypeName="erp__Model.ProductClass_Supplier">
-              <MappingFragment StoreEntitySet="ProductClass_Supplier">
-                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductOrder">
-            <EntityTypeMapping TypeName="erp__Model.ProductOrder">
-              <MappingFragment StoreEntitySet="ProductOrder">
-                <ScalarProperty Name="AuditUser" ColumnName="AuditUser" />
-                <ScalarProperty Name="OrderState" ColumnName="OrderState" />
-                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
-                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="AuditRemark" ColumnName="AuditRemark" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="OrderToTime" ColumnName="OrderToTime" />
-                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
-                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductPresencenOrder">
-            <EntityTypeMapping TypeName="erp__Model.ProductPresencenOrder">
-              <MappingFragment StoreEntitySet="ProductPresencenOrder">
-                <ScalarProperty Name="PresencenOrderCode" ColumnName="PresencenOrderCode" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="PresencenOrderID" ColumnName="PresencenOrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductProperty">
-            <EntityTypeMapping TypeName="erp__Model.ProductProperty">
-              <MappingFragment StoreEntitySet="ProductProperty">
-                <ScalarProperty Name="ProductPropertyOrder" ColumnName="ProductPropertyOrder" />
-                <ScalarProperty Name="ProductPropertyIntro" ColumnName="ProductPropertyIntro" />
-                <ScalarProperty Name="ProductPropertyName" ColumnName="ProductPropertyName" />
-                <ScalarProperty Name="ProductPropertyCode" ColumnName="ProductPropertyCode" />
-                <ScalarProperty Name="ProductPropertyID" ColumnName="ProductPropertyID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Storage">
-            <EntityTypeMapping TypeName="erp__Model.Storage">
-              <MappingFragment StoreEntitySet="Storage">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="erp__Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="StorageLocaltion" ColumnName="StorageLocaltion" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
-                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
-                <ScalarProperty Name="StorageCode" ColumnName="StorageCode" />
-                <ScalarProperty Name="StorageTypeID" ColumnName="StorageTypeID" />
-                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StorageLocation">
-            <EntityTypeMapping TypeName="erp__Model.StorageLocation">
-              <MappingFragment StoreEntitySet="StorageLocation">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
-                <ScalarProperty Name="MaxVolume" ColumnName="MaxVolume" />
-                <ScalarProperty Name="StorageLocationNo" ColumnName="StorageLocationNo" />
-                <ScalarProperty Name="StorageLocationCode" ColumnName="StorageLocationCode" />
-                <ScalarProperty Name="StorageRegionID" ColumnName="StorageRegionID" />
-                <ScalarProperty Name="StorageLocationID" ColumnName="StorageLocationID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StorageRegion">
-            <EntityTypeMapping TypeName="erp__Model.StorageRegion">
-              <MappingFragment StoreEntitySet="StorageRegion">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
-                <ScalarProperty Name="StorageRegionName" ColumnName="StorageRegionName" />
-                <ScalarProperty Name="StorageRegionCode" ColumnName="StorageRegionCode" />
-                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
-                <ScalarProperty Name="StorageRegionID" ColumnName="StorageRegionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StorageType">
-            <EntityTypeMapping TypeName="erp__Model.StorageType">
-              <MappingFragment StoreEntitySet="StorageType">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LastEditTime" ColumnName="LastEditTime" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="StorageTypeName" ColumnName="StorageTypeName" />
-                <ScalarProperty Name="StorageTypeID" ColumnName="StorageTypeID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastLoginIP" ColumnName="LastLoginIP" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dict">
             <EntityTypeMapping TypeName="erp__Model.Dict">
               <MappingFragment StoreEntitySet="Dict">
-                <ScalarProperty Name="DictOrder" ColumnName="DictOrder" />
-                <ScalarProperty Name="DictName" ColumnName="DictName" />
-                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
                 <ScalarProperty Name="DictCode" ColumnName="DictCode" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="DictName" ColumnName="DictName" />
+                <ScalarProperty Name="DictOrder" ColumnName="DictOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DictType">
             <EntityTypeMapping TypeName="erp__Model.DictType">
               <MappingFragment StoreEntitySet="DictType">
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Admin">
-            <EntityTypeMapping TypeName="erp__Model.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
-                <ScalarProperty Name="LastLoginIP" ColumnName="LastLoginIP" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <EntitySetMapping Name="Order_Product">
+            <EntityTypeMapping TypeName="erp__Model.Order_Product">
+              <MappingFragment StoreEntitySet="Order_Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresencenOrder_Product">
+            <EntityTypeMapping TypeName="erp__Model.PresencenOrder_Product">
+              <MappingFragment StoreEntitySet="PresencenOrder_Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="BuyCount" ColumnName="BuyCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="erp__Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductBarCode" ColumnName="ProductBarCode" />
+                <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SPEC" ColumnName="SPEC" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_ProductProperty">
+            <EntityTypeMapping TypeName="erp__Model.Product_ProductProperty">
+              <MappingFragment StoreEntitySet="Product_ProductProperty">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductPropertyID" ColumnName="ProductPropertyID" />
+                <ScalarProperty Name="ProductPropertyVal" ColumnName="ProductPropertyVal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductClass">
+            <EntityTypeMapping TypeName="erp__Model.ProductClass">
+              <MappingFragment StoreEntitySet="ProductClass">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassIntro" ColumnName="ClassIntro" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ParentPath" ColumnName="ParentPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductClass_Supplier">
+            <EntityTypeMapping TypeName="erp__Model.ProductClass_Supplier">
+              <MappingFragment StoreEntitySet="ProductClass_Supplier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductOrder">
+            <EntityTypeMapping TypeName="erp__Model.ProductOrder">
+              <MappingFragment StoreEntitySet="ProductOrder">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="OrderToTime" ColumnName="OrderToTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AuditRemark" ColumnName="AuditRemark" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="OrderState" ColumnName="OrderState" />
+                <ScalarProperty Name="AuditUser" ColumnName="AuditUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPresencenOrder">
+            <EntityTypeMapping TypeName="erp__Model.ProductPresencenOrder">
+              <MappingFragment StoreEntitySet="ProductPresencenOrder">
+                <ScalarProperty Name="PresencenOrderID" ColumnName="PresencenOrderID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="PresencenOrderCode" ColumnName="PresencenOrderCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductProperty">
+            <EntityTypeMapping TypeName="erp__Model.ProductProperty">
+              <MappingFragment StoreEntitySet="ProductProperty">
+                <ScalarProperty Name="ProductPropertyID" ColumnName="ProductPropertyID" />
+                <ScalarProperty Name="ProductPropertyCode" ColumnName="ProductPropertyCode" />
+                <ScalarProperty Name="ProductPropertyName" ColumnName="ProductPropertyName" />
+                <ScalarProperty Name="ProductPropertyIntro" ColumnName="ProductPropertyIntro" />
+                <ScalarProperty Name="ProductPropertyOrder" ColumnName="ProductPropertyOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="erp__Model.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storage">
+            <EntityTypeMapping TypeName="erp__Model.Storage">
+              <MappingFragment StoreEntitySet="Storage">
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="StorageTypeID" ColumnName="StorageTypeID" />
+                <ScalarProperty Name="StorageCode" ColumnName="StorageCode" />
+                <ScalarProperty Name="StorageName" ColumnName="StorageName" />
+                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StorageLocaltion" ColumnName="StorageLocaltion" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageLocation">
+            <EntityTypeMapping TypeName="erp__Model.StorageLocation">
+              <MappingFragment StoreEntitySet="StorageLocation">
+                <ScalarProperty Name="StorageLocationID" ColumnName="StorageLocationID" />
+                <ScalarProperty Name="StorageRegionID" ColumnName="StorageRegionID" />
+                <ScalarProperty Name="StorageLocationCode" ColumnName="StorageLocationCode" />
+                <ScalarProperty Name="StorageLocationNo" ColumnName="StorageLocationNo" />
+                <ScalarProperty Name="MaxVolume" ColumnName="MaxVolume" />
+                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageRegion">
+            <EntityTypeMapping TypeName="erp__Model.StorageRegion">
+              <MappingFragment StoreEntitySet="StorageRegion">
+                <ScalarProperty Name="StorageRegionID" ColumnName="StorageRegionID" />
+                <ScalarProperty Name="StorageID" ColumnName="StorageID" />
+                <ScalarProperty Name="StorageRegionCode" ColumnName="StorageRegionCode" />
+                <ScalarProperty Name="StorageRegionName" ColumnName="StorageRegionName" />
+                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageType">
+            <EntityTypeMapping TypeName="erp__Model.StorageType">
+              <MappingFragment StoreEntitySet="StorageType">
+                <ScalarProperty Name="StorageTypeID" ColumnName="StorageTypeID" />
+                <ScalarProperty Name="StorageTypeName" ColumnName="StorageTypeName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="LastEditTime" ColumnName="LastEditTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="erp__Model.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupplierLevel" ColumnName="SupplierLevel" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SupplierState" ColumnName="SupplierState" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SysMenu">
             <EntityTypeMapping TypeName="erp__Model.SysMenu">
               <MappingFragment StoreEntitySet="SysMenu">
-                <ScalarProperty Name="ParentPath" ColumnName="ParentPath" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Depth" ColumnName="Depth" />
-                <ScalarProperty Name="ClassIntro" ColumnName="ClassIntro" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassIntro" ColumnName="ClassIntro" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ParentPath" ColumnName="ParentPath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="Role_User" TypeName="erp__Model.Role_User" StoreEntitySet="Role_User">
-            <EndProperty Name="Role">
-              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-            </EndProperty>
             <EndProperty Name="Admin">
               <ScalarProperty Name="AdminID" ColumnName="AdminID" />
             </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="SysMenu_Role" TypeName="erp__Model.SysMenu_Role" StoreEntitySet="SysMenu_Role">
-            <EndProperty Name="SysMenu">
-              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-            </EndProperty>
             <EndProperty Name="Role">
               <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Supplier">
-            <EntityTypeMapping TypeName="erp__Model.Supplier">
-              <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="Contract" ColumnName="Contract" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="PayType" ColumnName="PayType" />
-                <ScalarProperty Name="SupplierState" ColumnName="SupplierState" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="TEL" ColumnName="TEL" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="SupplierLevel" ColumnName="SupplierLevel" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="SysMenu_Role" TypeName="erp__Model.SysMenu_Role" StoreEntitySet="SysMenu_Role">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            </EndProperty>
+            <EndProperty Name="SysMenu">
+              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

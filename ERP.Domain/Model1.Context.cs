@@ -25,6 +25,9 @@ namespace ERP.Domain
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Dict> Dict { get; set; }
+        public virtual DbSet<DictType> DictType { get; set; }
         public virtual DbSet<Order_Product> Order_Product { get; set; }
         public virtual DbSet<PresencenOrder_Product> PresencenOrder_Product { get; set; }
         public virtual DbSet<Product> Product { get; set; }
@@ -34,15 +37,12 @@ namespace ERP.Domain
         public virtual DbSet<ProductOrder> ProductOrder { get; set; }
         public virtual DbSet<ProductPresencenOrder> ProductPresencenOrder { get; set; }
         public virtual DbSet<ProductProperty> ProductProperty { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Storage> Storage { get; set; }
         public virtual DbSet<StorageLocation> StorageLocation { get; set; }
         public virtual DbSet<StorageRegion> StorageRegion { get; set; }
         public virtual DbSet<StorageType> StorageType { get; set; }
-        public virtual DbSet<Dict> Dict { get; set; }
-        public virtual DbSet<DictType> DictType { get; set; }
-        public virtual DbSet<Admin> Admin { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<SysMenu> SysMenu { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
+        public virtual DbSet<SysMenu> SysMenu { get; set; }
     }
 }

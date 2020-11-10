@@ -7,7 +7,7 @@ using ERP.ViewModel;
 
 namespace ERP.IDAL
 {
-    public interface IProductClassDAL<T> : IBaseAction<T>
+    public interface IProductClassDAL<T> : IBaseAction<T>, IDisposable
     {
         /// <summary>
         /// 移动分类

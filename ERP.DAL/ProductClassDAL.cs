@@ -9,6 +9,7 @@ using ERP.IDAL;
 using ERP.Utility;
 using ERP.ViewModel;
 using EntityFramework.Extensions;
+using System.Runtime.Remoting.Messaging;
 
 namespace ERP.DAL
 {
@@ -25,6 +26,11 @@ namespace ERP.DAL
         public int Delete(int id)
         {
             return db.ProductClass.Where(m=>m.ClassID == id).Delete();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool ExistsChildClass(int id)
@@ -59,8 +65,9 @@ namespace ERP.DAL
         /// <returns></returns>
         public int Update(ProductClassModel t)
         {
-            return db.ProductClass.Where(m => m.ClassID == t.ClassID).Update(m => new ProductClass { ClassName = t.ClassName, ClassIntro = t.ClassIntro });
+            db.Entry<ProductClass>(t.MapTo<ProductClass>()).State = EntityState.Modified;
+            return db.SaveChanges();
+            //return db.ProductClass.Where(m => m.ClassID == t.ClassID).Update(m => new ProductClass { ClassName = t.ClassName, ClassIntro = t.ClassIntro });
         }
-
     }
 }
