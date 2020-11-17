@@ -22,22 +22,4 @@ namespace ERP.BLL
             throw new NotImplementedException();
         }
     }
-
-
-    public class TestBLL : IUserBLL
-    {
-        public int Create(UserModel userModel)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public List<UserModel> GetUsers()
-        {
-            return new List<UserModel> {
-                new UserModel{ UserID = 1, UserName = "张三", Password = Guid.NewGuid().ToString() },
-                new UserModel{ UserID = 2, UserName = "李四", Password = Guid.NewGuid().ToString() },
-                new UserModel{ UserID = 3, UserName = "王五", Password = Guid.NewGuid().ToString() }
-            };
-        }
-    }
 }
