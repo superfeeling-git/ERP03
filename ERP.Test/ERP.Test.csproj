@@ -101,11 +101,78 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERP_EF.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_EF.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERP_EF.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERP_EF.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_EF.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductClass.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductProperty.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingAudit.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingProduct.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Storage.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StorageLocation.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StorageRegion.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StorageType.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierClass.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="test.cs">
+      <DependentUpon>ERP_EF.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="ERP_EF.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERP_EF.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ERP_EF.edmx.diagram">
+      <DependentUpon>ERP_EF.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +196,17 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ERP_EF.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_EF.edmx</DependentUpon>
+      <LastGenOutput>ERP_EF.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ERP_EF.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_EF.edmx</DependentUpon>
+      <LastGenOutput>ERP_EF.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -48,8 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductClassModel.cs" />
     <Compile Include="ResultInfo.cs" />
+    <Compile Include="SendMsgModel.cs" />
     <Compile Include="SupplierModel.cs" />
     <Compile Include="SupplierQueryModel.cs" />
+    <Compile Include="UserModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

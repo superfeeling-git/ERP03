@@ -18,6 +18,11 @@
     }
 
 
+    <div class="att">
+        <div>属性选择</div>
+        <div>属性值</div>
+    </div>
+
 
     @{ IEnumerable<DictModel> dictList = ViewBag.Dict as IEnumerable<DictModel>; }
     <div class="layui-fluid">
@@ -109,23 +114,25 @@
                         </div>
                     </div>
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">省市区：</label>
-                        <div class="layui-input-block">
-                            <div class="layui-inline city">
-                                <select name="Province" id="Province" lay-filter="Province">
-                                </select>
-                            </div>
-                            <div class="layui-inline city">
-                                <select name="City" id="City" lay-filter="City">
-                                </select>
-                            </div>
-                            <div class="layui-inline city">
-                                <select name="Area" id="Area" lay-filter="Area">
-                                </select>
-                            </div>
-                            <div class="layui-inline address">
-                                <input type="text" name="Address" lay-verify="required" autocomplete="off" class="layui-input">
+                    <div id="Address">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">省市区：</label>
+                            <div class="layui-input-block">
+                                <div class="layui-inline city">
+                                    <select name="Province" id="Province" lay-filter="Province">
+                                    </select>
+                                </div>
+                                <div class="layui-inline city">
+                                    <select name="City" id="City" lay-filter="City">
+                                    </select>
+                                </div>
+                                <div class="layui-inline city">
+                                    <select name="Area" id="Area" lay-filter="Area">
+                                    </select>
+                                </div>
+                                <div class="layui-inline address">
+                                    <input type="text" name="Address" lay-verify="required" autocomplete="off" class="layui-input">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,6 +167,8 @@
                                 <input type="hidden" name="Contract" />
                                 <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                <button type="button" class="layui-btn layui-btn-primary" id="AddElem">添加元素</button>
+
                             </div>
                         </div>
                     </div>
@@ -172,6 +181,13 @@
     <script src="~/Scripts/PCASClass.js"></script>
     <script src="/layuiadmin/layui/layui.js"></script>
     <script>
+        $(function () {
+            $("#AddElem").click(function () {
+                var html = $("#Address").html();
+
+                $("#Address").after(html);
+            })
+        })
         layui.config({
             base: '/layuiadmin/' //静态资源所在路径
         }).extend({

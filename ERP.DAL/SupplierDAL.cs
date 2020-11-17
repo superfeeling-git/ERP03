@@ -135,6 +135,8 @@ namespace ERP.DAL
 
             pageListModel.TotalCount = query.Count();
 
+            //query.Where("")
+
             if(string.IsNullOrWhiteSpace(field))
                 pageListModel.PageList = query.OrderBy(m=>m.AddTime).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
             else

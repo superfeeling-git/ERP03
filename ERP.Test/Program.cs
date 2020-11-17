@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using EntityFramework.Extensions;
+using System.Linq.Dynamic;
 using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.HSSF.Util;
@@ -11,6 +12,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using ERP.Domain;
+using Autofac.Features.ResolveAnything;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ERP.Test
 {
@@ -18,248 +22,378 @@ namespace ERP.Test
     {
         static void Main(string[] args)
         {
-            erp__Entities db = new erp__Entities();
-            db.Admin.Where(m => m.AdminID == 3).Update(m=>new Admin { LastLoginIP = "666" });
+            //string[] names = { "可乐","贝贝","香草" };
 
-            Console.WriteLine(HashPassword("666666"));
+            //Console.WriteLine(string.Join(",", names.Select(m => $"\"{m}\"")));
 
-            Console.ReadLine();
-
-            //1、创建工作簿
-            HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
-
-            //2、创建工作表
-            ISheet sheet = hSSFWorkbook.CreateSheet("第1个工作表");
-
-            string FilePath = Path.GetFullPath("../../") + "test.xls";
-
-            //文档摘要信息
-            DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
-            dsi.Company = "八维北京校区";
-
-            SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
-            si.Author = "物联网1803A";
-
-            hSSFWorkbook.DocumentSummaryInformation = dsi;
-            hSSFWorkbook.SummaryInformation = si;
-
-            #region MyRegion
-            ////3、创建行、单元格
-            //IRow row = sheet.CreateRow(0);      //行
-
-            //ICell cell = row.CreateCell(0);     //单元格
-
-            ////4、写值
-            //cell.SetCellValue("单元格内容测试");
-
-            ////单元格合并
-            //sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, 6));
-            #endregion
-
-            //dechengEntities db = new dechengEntities();
+            //Console.ReadLine();
 
 
-            //准备数据
-            //List<dc_Log> dc_Logs = db.dc_Log.Take(20).ToList();
 
-            //PropertyInfo[] propertyInfos = typeof(dc_Log).GetProperties();
+            erp_testEntities db = new erp_testEntities();
 
-            //sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, propertyInfos.Length - 1));
-
-            IRow headerRow = sheet.CreateRow(0);
-
-            headerRow.Height = 40 * 20;
-
-            ICell headerCell = headerRow.CreateCell(0);
-
-            headerCell.SetCellValue("日志记录");
-
-            ICellStyle hSSFCellStyle = hSSFWorkbook.CreateCellStyle();
-
-            IFont hSSFFont = hSSFWorkbook.CreateFont();
-
-            hSSFFont.Color = HSSFColor.Red.Index;
-            //字号
-            hSSFFont.FontHeightInPoints = 19;
-
-            //水平居中
-            hSSFCellStyle.Alignment = HorizontalAlignment.Center;
-            //垂直居中
-            hSSFCellStyle.VerticalAlignment = VerticalAlignment.Center;
-
-            //设置单元格样式的字体
-            hSSFCellStyle.SetFont(hSSFFont);
-
-            //设置标头的样式
-            headerCell.CellStyle = hSSFCellStyle;
-
-
-            //遍历数据行
-            //for (int i = 1; i < dc_Logs.Count(); i++)
-            //{
-            //    //创建Excel行
-            //    IRow row = sheet.CreateRow(i);
-
-            //    row.Height = 20 * 20;
-
-            //    //遍历所有属必
-            //    for (int p = 0; p < propertyInfos.Length; p++)
-            //    {
-            //        //创建Excel列
-            //        ICell cell = row.CreateCell(p);
-
-            //        sheet.SetColumnWidth(p, 14 * 256);
-
-            //        //获取列的值
-            //        object obj = propertyInfos[p].GetValue(dc_Logs[i]);
-
-            //        //写值
-            //        cell.SetCellValue(obj.ToString());
-            //    }
-            //}
-
-            using (FileStream fs = new FileStream(FilePath, FileMode.Create))
+            foreach (var item in db.ProductClass.Where("ParentID = 20"))
             {
-                hSSFWorkbook.Write(fs);
+                Console.WriteLine($"ID:{item.ClassID},Name:{item.ClassName}");
             }
 
-            Console.WriteLine(FilePath);
+            Console.ReadLine();
+
+            //db.ProductProperty.
+
+            //var list = db.ProductProperty.GroupBy(m => m.ProductId).Select(m => m.Max(s => s.PropertyID));
+
+
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //Console.ReadLine();
+
+
+
+            //var list = db.Product.Join(db.ProductProperty, a => a.ProductId, b => b.ProductId, (a, b) => new { a, b })
+            //    .Where
+            //    (
+            //    m => db.ProductProperty
+            //        .GroupBy(g => g.ProductId)
+            //        .Select(g => g.Max(o => o.PropertyID))
+            //        .Any(any => any.Value == m.b.PropertyID)
+            //    );
+
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item.a.ProductName);
+            //}
+
+            //Console.ReadLine();
+
+            /*
+            var propertys = db.ProductProperty.GroupBy(m => m.ProductId).ToList()
+                .SelectMany(m => m.Select((o, i) => new { o, i }))
+                .Where(m => m.i == 0)
+                .Select(m => m.o);
+
+
+            foreach (var item in propertys)
+            {
+                Console.WriteLine(item.PropertyValue);
+            }
 
             Console.ReadLine();
 
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.a.ProductName);
+            }
+            
+
+            Console.ReadLine();
+
+            */
+            //List<PeopleType> peopleTypes = new List<PeopleType> {
+            //    new PeopleType{ TypeName = "黑人", TypeID = 1, People = new List<People>{ 
+            //            new People{ Name = "zhangsan", TypeID = 1, ID = 1 },
+            //            new People{ Name = "zhangsan", TypeID = 1, ID = 2 },
+            //            new People{ Name = "wangwu", TypeID = 1, ID = 3 }
+            //        }  
+            //    },
+            //    new PeopleType{ TypeName = "黄人", TypeID = 2, People = new List<People>{
+            //            new People{ Name = "张三", TypeID = 2, ID = 4 },
+            //            new People{ Name = "张三", TypeID = 2, ID = 5 },
+            //            new People{ Name = "王五", TypeID = 2, ID = 6 }
+            //        }
+            //    }
+            //};
+
+            //List<People> peoples = new List<People> {
+            //    new People{ Name = "张三", TypeID = 1, ID = 1 },
+            //    new People{ Name = "李四", TypeID = 2, ID = 2 },
+            //    new People{ Name = "王五", TypeID = 2, ID = 3 }
+            //};
+
+            //var group = peoples.GroupBy(m => m.TypeID).Select(p => p.Max(o => o.ID));
+
+            //var group1 = peoples.OrderByDescending(m => m.ID).GroupBy(m => m.TypeID).SelectMany(o => o.Select((i, b) => new { i, b }))
+            //    .Where(s => s.b == 0).Select(m => m.i);
+
+            //foreach (var item in group1)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+
+            //Console.ReadLine();
+
+            //foreach (var item in group)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
 
-            #region MyRegion
+            //var list = peopleTypes.SelectMany(m => m.People.GroupBy(s=>s.Name));
+
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item.Key);
+            //}
+
+            //Console.ReadLine();
+
             //erp__Entities db = new erp__Entities();
+            //db.Admin.Where(m => m.AdminID == 3).Update(m=>new Admin { LastLoginIP = "666" });
 
-            //Console.WriteLine(db.Admin.Last().UserName);
+            //Console.WriteLine(HashPassword("666666"));
 
-            //int[] ClassID = new int[] { 1,2,3, 5 };
+            //Console.ReadLine();
 
-            //Console.WriteLine(ClassID.Last());
+            ////1、创建工作簿
+            //HSSFWorkbook hSSFWorkbook = new HSSFWorkbook();
+
+            ////2、创建工作表
+            //ISheet sheet = hSSFWorkbook.CreateSheet("第1个工作表");
+
+            //string FilePath = Path.GetFullPath("../../") + "test.xls";
+
+            ////文档摘要信息
+            //DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
+            //dsi.Company = "八维北京校区";
+
+            //SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
+            //si.Author = "物联网1803A";
+
+            //hSSFWorkbook.DocumentSummaryInformation = dsi;
+            //hSSFWorkbook.SummaryInformation = si;
+
+            //#region MyRegion
+            //////3、创建行、单元格
+            ////IRow row = sheet.CreateRow(0);      //行
+
+            ////ICell cell = row.CreateCell(0);     //单元格
+
+            //////4、写值
+            ////cell.SetCellValue("单元格内容测试");
+
+            //////单元格合并
+            ////sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, 6));
+            //#endregion
+
+            ////dechengEntities db = new dechengEntities();
+
+
+            ////准备数据
+            ////List<dc_Log> dc_Logs = db.dc_Log.Take(20).ToList();
+
+            ////PropertyInfo[] propertyInfos = typeof(dc_Log).GetProperties();
+
+            ////sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 0, propertyInfos.Length - 1));
+
+            //IRow headerRow = sheet.CreateRow(0);
+
+            //headerRow.Height = 40 * 20;
+
+            //ICell headerCell = headerRow.CreateCell(0);
+
+            //headerCell.SetCellValue("日志记录");
+
+            //ICellStyle hSSFCellStyle = hSSFWorkbook.CreateCellStyle();
+
+            //IFont hSSFFont = hSSFWorkbook.CreateFont();
+
+            //hSSFFont.Color = HSSFColor.Red.Index;
+            ////字号
+            //hSSFFont.FontHeightInPoints = 19;
+
+            ////水平居中
+            //hSSFCellStyle.Alignment = HorizontalAlignment.Center;
+            ////垂直居中
+            //hSSFCellStyle.VerticalAlignment = VerticalAlignment.Center;
+
+            ////设置单元格样式的字体
+            //hSSFCellStyle.SetFont(hSSFFont);
+
+            ////设置标头的样式
+            //headerCell.CellStyle = hSSFCellStyle;
+
+
+            ////遍历数据行
+            ////for (int i = 1; i < dc_Logs.Count(); i++)
+            ////{
+            ////    //创建Excel行
+            ////    IRow row = sheet.CreateRow(i);
+
+            ////    row.Height = 20 * 20;
+
+            ////    //遍历所有属必
+            ////    for (int p = 0; p < propertyInfos.Length; p++)
+            ////    {
+            ////        //创建Excel列
+            ////        ICell cell = row.CreateCell(p);
+
+            ////        sheet.SetColumnWidth(p, 14 * 256);
+
+            ////        //获取列的值
+            ////        object obj = propertyInfos[p].GetValue(dc_Logs[i]);
+
+            ////        //写值
+            ////        cell.SetCellValue(obj.ToString());
+            ////    }
+            ////}
+
+            //using (FileStream fs = new FileStream(FilePath, FileMode.Create))
+            //{
+            //    hSSFWorkbook.Write(fs);
+            //}
+
+            //Console.WriteLine(FilePath);
 
             //Console.ReadLine();
 
 
 
+            //#region MyRegion
+            ////erp__Entities db = new erp__Entities();
 
-            //Supplier supplier = new Supplier { SupplierName = "Test" };
+            ////Console.WriteLine(db.Admin.Last().UserName);
 
-            //int[] ClassID = new int[] { 21, 22, 23 };
+            ////int[] ClassID = new int[] { 1,2,3, 5 };
 
-            //List<ProductClass_Supplier> productClass_Suppliers = ClassID.MapToList<int, ProductClass_Supplier>();            
+            ////Console.WriteLine(ClassID.Last());
 
-            //supplier.ProductClass_Supplier = productClass_Suppliers;
-
-            //db.Supplier.Add(supplier);
-
-            //db.SaveChanges();
+            ////Console.ReadLine();
 
 
 
-            //db.Supplier.Add(new Supplier { }).ProductClass_Supplier
+
+            ////Supplier supplier = new Supplier { SupplierName = "Test" };
+
+            ////int[] ClassID = new int[] { 21, 22, 23 };
+
+            ////List<ProductClass_Supplier> productClass_Suppliers = ClassID.MapToList<int, ProductClass_Supplier>();            
+
+            ////supplier.ProductClass_Supplier = productClass_Suppliers;
+
+            ////db.Supplier.Add(supplier);
+
+            ////db.SaveChanges();
 
 
 
-            //IEnumerable<SupplierModel> suppliers = db.Supplier.AsEnumerable().MapToIEnumerable<Supplier, SupplierModel>();
-            //foreach (var item in suppliers)
-            //{
-            //    Console.WriteLine(item.SupplierName);
-            //}
-
-            //Supplier supplier = new Supplier { SupplierName = "供应商主键获取测试" };
-
-            //IList<ProductClass_Supplier> productClass_Suppliers = new List<ProductClass_Supplier>();
-            //productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 21  });
-            //productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 22  });
-            //productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 23  });
-
-            //supplier.ProductClass_Supplier = productClass_Suppliers;
-
-            //db.Entry<Supplier>(supplier).State = System.Data.Entity.EntityState.Added;
-
-            //Console.WriteLine($"保存前：{supplier.SupplierID}");
-
-            //db.Supplier.Add(supplier);
-
-            //db.SaveChanges();
-
-            //Console.WriteLine($"保存后：{supplier.SupplierID}");
-            #endregion
-
-
-            #region MyRegion
-            ////AdminBLL adminBLL = new AdminBLL();
-            ////adminBLL.Add(new AdminModel { AddTime = DateTime.Now, AdminId = 1, Password = Guid.NewGuid().ToString(), UserName = "Admin" });
-
-            ////创建容器
-            //var builder = new ContainerBuilder();
-
-            ////向容器注册类型
-            //builder.RegisterType<WriteString>().As<IOutput>();
-            //builder.RegisterType<DateWriter>().As<IDateWriter>();
-
-            ////已配置组件注册的新容器
-            //IContainer Container = builder.Build();
-
-            //using (ILifetimeScope scope = Container.BeginLifetimeScope())
-            //{
-            //    //解析
-            //    //自动创建实现这个接口的类的对象
-            //    IDateWriter writer = scope.Resolve<IDateWriter>();
-            //    writer.Writedate();
-            //}
-            #endregion
-
-            //erp__Entities db = new erp__Entities();
-
-            ////Console.WriteLine("A001".TrimEnd(','));
-
-            //Console.ReadLine();
-
-            //string Prefix = "GY";
-
-            //for (int i = 65; i < 65 + 26; i++)
-            //{
-            //    Console.WriteLine((char)i);
-            //}
-
-            //Console.WriteLine("1".PadLeft(4, '0'));
-
-            #region MyRegion
-            //db.Role.Update<Role>(m => new Role { RoleID = 1, AddTime = DateTime.Now });
+            ////db.Supplier.Add(new Supplier { }).ProductClass_Supplier
 
 
 
-            //db.Role.Attach(new Role { });
+            ////IEnumerable<SupplierModel> suppliers = db.Supplier.AsEnumerable().MapToIEnumerable<Supplier, SupplierModel>();
+            ////foreach (var item in suppliers)
+            ////{
+            ////    Console.WriteLine(item.SupplierName);
+            ////}
 
-            //db.Entry<ProductClass>(new ProductClass { ClassID = 1, ClassName = "test", ClassIntro = "", Depth = 0 }).State = EntityState.Modified;
+            ////Supplier supplier = new Supplier { SupplierName = "供应商主键获取测试" };
+
+            ////IList<ProductClass_Supplier> productClass_Suppliers = new List<ProductClass_Supplier>();
+            ////productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 21  });
+            ////productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 22  });
+            ////productClass_Suppliers.Add(new ProductClass_Supplier { ClassID = 23  });
+
+            ////supplier.ProductClass_Supplier = productClass_Suppliers;
+
+            ////db.Entry<Supplier>(supplier).State = System.Data.Entity.EntityState.Added;
+
+            ////Console.WriteLine($"保存前：{supplier.SupplierID}");
+
+            ////db.Supplier.Add(supplier);
+
+            ////db.SaveChanges();
+
+            ////Console.WriteLine($"保存后：{supplier.SupplierID}");
+            //#endregion
 
 
-            //db.Entry<Role>(new Role { AddTime = DateTime.Now, RoleName = "RoleName", RoleID = 3 }).State = EntityState.Modified;
+            //#region MyRegion
+            //////AdminBLL adminBLL = new AdminBLL();
+            //////adminBLL.Add(new AdminModel { AddTime = DateTime.Now, AdminId = 1, Password = Guid.NewGuid().ToString(), UserName = "Admin" });
 
-            //db.SaveChanges();
+            //////创建容器
+            ////var builder = new ContainerBuilder();
 
-            //foreach (var item in person.GetType().GetProperties())
-            //{
-            //    Console.WriteLine(item.GetValue(person));
-            //}
-            #endregion
+            //////向容器注册类型
+            ////builder.RegisterType<WriteString>().As<IOutput>();
+            ////builder.RegisterType<DateWriter>().As<IDateWriter>();
 
-            //Console.WriteLine(Generator("GY", "A999", 3, true));
+            //////已配置组件注册的新容器
+            ////IContainer Container = builder.Build();
 
-            //Console.WriteLine('A'.GetType());
+            ////using (ILifetimeScope scope = Container.BeginLifetimeScope())
+            ////{
+            ////    //解析
+            ////    //自动创建实现这个接口的类的对象
+            ////    IDateWriter writer = scope.Resolve<IDateWriter>();
+            ////    writer.Writedate();
+            ////}
+            //#endregion
 
-            //A001
-            //001
+            ////erp__Entities db = new erp__Entities();
 
-            //Console.WriteLine(char.IsLetter('A'));
-            //Console.WriteLine(char.IsLetter('0'));
+            //////Console.WriteLine("A001".TrimEnd(','));
 
-            //Console.WriteLine(Generator("SL", "9999"));
+            ////Console.ReadLine();
 
-            Console.Read();
+            ////string Prefix = "GY";
 
+            ////for (int i = 65; i < 65 + 26; i++)
+            ////{
+            ////    Console.WriteLine((char)i);
+            ////}
+
+            ////Console.WriteLine("1".PadLeft(4, '0'));
+
+            //#region MyRegion
+            ////db.Role.Update<Role>(m => new Role { RoleID = 1, AddTime = DateTime.Now });
+
+
+
+            ////db.Role.Attach(new Role { });
+
+            ////db.Entry<ProductClass>(new ProductClass { ClassID = 1, ClassName = "test", ClassIntro = "", Depth = 0 }).State = EntityState.Modified;
+
+
+            ////db.Entry<Role>(new Role { AddTime = DateTime.Now, RoleName = "RoleName", RoleID = 3 }).State = EntityState.Modified;
+
+            ////db.SaveChanges();
+
+            ////foreach (var item in person.GetType().GetProperties())
+            ////{
+            ////    Console.WriteLine(item.GetValue(person));
+            ////}
+            //#endregion
+
+            ////Console.WriteLine(Generator("GY", "A999", 3, true));
+
+            ////Console.WriteLine('A'.GetType());
+
+            ////A001
+            ////001
+
+            ////Console.WriteLine(char.IsLetter('A'));
+            ////Console.WriteLine(char.IsLetter('0'));
+
+            ////Console.WriteLine(Generator("SL", "9999"));
+
+            //Console.Read();
+
+            Task task = test();
+            
+
+            Console.WriteLine("调用");
+
+            Console.ReadLine();
+        }
+
+        public static async Task<string> test()
+        {
+            await (Task.Delay(10000));
+            return "";            
         }
 
         public static string HashPassword(string password)
@@ -372,10 +506,19 @@ namespace ERP.Test
         }
     }
 
+    public class PeopleType
+    {
+        public int TypeID { get; set; }
+        public string TypeName { get; set; }
+        public ICollection<People> People { get; set; }
+    }
+
     public class People
     {
         public int ID { get; set; }
+        public int TypeID { get; set; }
         public string Name { get; set; }
+        public int Age { get; set; }
     }
 
     public class Person

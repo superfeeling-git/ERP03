@@ -114,13 +114,13 @@
               //监听事件
               table.on('toolbar(user)', function (obj) {
                   var checkStatus = table.checkStatus(obj.config.id);
-                  //动态创建表单加到fbody中，最后删除表单
+                    //动态创建表单加到fbody中，最后删除表单
                     //var queryForm = $("#queryCourseForm");
-                    @*var exportForm = $("<form action='@Url.Action("OutExcel")' method='post'></form>")
+                    var exportForm = $("<form action='@Url.Action("OutExcel")' method='post'></form>")
                     //exportForm.html(queryForm.html());
                     $(document.body).append(exportForm);
                     exportForm.submit();
-                    exportForm.remove();*@
+                    exportForm.remove();
               });
 
               //监听排序事件 
